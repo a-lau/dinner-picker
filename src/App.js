@@ -5,7 +5,28 @@ import Manager from './Manager';
 import Results from './Results';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.clickFirst=this.clickFirst.bind(this);
+    this.clickSecond=this.clickSecond.bind(this);
+    this.state={lastClicked: 'first'};
+  }
+  
+  clickFirst(e) {
+    e.preventDefault();
+    console.log('The tab was clicked.');
+    this.setState({lastClicked: 'first'});
+  } 
+  clickSecond(e) {
+    e.preventDefault();
+    console.log('The tab was clicked.');
+    this.setState({lastClicked: 'second'});
+  }
+  
   render() {
+    const first = (this.state.lastClicked === 'first' ? 'active' : '')
+    const second = (this.state.lastClicked === 'second' ? 'active' : '')
+    
     return (
       <div>
         <h2 className="ui header">
@@ -16,13 +37,13 @@ export default class App extends React.Component {
         <div className="ui two column middle aligned very relaxed stackable grid">
 	  <div className="column">
 	    <div className="ui top attached tabular menu">
-              <a className="item" data-tab="first">Pick Meal</a>
-	      <a className="item active" data-tab="second">Manage</a>
+              <a className={"item "+first} data-tab="first" onClick={this.clickFirst}>Pick Meal</a>
+	      <a className={"item "+second} data-tab="second" onClick={this.clickSecond}>Manage</a>
             </div>
-            <div className="ui bottom attached tab segment" data-tab="first">
+            <div className={"ui bottom attached tab segment "+first} data-tab="first">
               <Picker />
             </div>
-            <div className="ui bottom attached tab segment active" data-tab="second">
+            <div className={"ui bottom attached tab segment "+second} data-tab="second">
   	      <Manager />
             </div>
 	  </div>

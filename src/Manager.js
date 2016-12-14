@@ -3,10 +3,20 @@ import React from 'react'
 export default class Manager extends React.Component {
     constructor(props) {
       super(props);
-      this.handleClick = this.handleClick.bind(this);
+      this.clickAdd= this.clickAdd.bind(this);
+      this.clickEdit= this.clickEdit.bind(this);
+      this.clickDelete= this.clickDelete.bind(this);
     }
     
-    handleClick(e) {
+    clickAdd(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+    }
+    clickEdit(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+    }
+    clickDelete(e) {
       e.preventDefault();
       console.log('The link was clicked.');
     }
@@ -17,7 +27,9 @@ export default class Manager extends React.Component {
           <label>Meal Type</label>
           <input type="text" name="meal-type" placeholder="Enter a meal option"></input>
         </div> 
-          <button className="ui button" onClick={this.handleClick}>Submit</button>
+          <button className="ui button" onClick={this.clickAdd}>Add New Item</button>
+          <button className="ui button" onClick={this.clickEdit}>Edit</button>
+	  <button className="ui button" onClick={this.clickDelete}>Delete Item</button>
       </form>
       );
     }
