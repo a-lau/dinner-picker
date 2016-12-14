@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import Picker from './Picker';
+import Manager from './Manager';
 
-class App extends Component {
+export default class App extends React.Component {
   render() {
     return (
-      <form className="ui form">
-        <div className="field">
-          <label>Meal Type</label>
-          <input type="text" name="meal-type" placeholder="Enter a meal option"></input>
-        </div> 
-          <button className="ui button">Submit</button>
-      </form>
+      <div>
+	<div className="ui top attached tabular menu">
+          <a className="item" data-tab="first">Pick Meal</a>
+
+	  <a className="item active" data-tab="second">Manage</a>
+ 
+        </div>
+        <div className="ui bottom attached tab segment" data-tab="first">
+          <Picker />
+        </div>
+        <div className="ui bottom attached tab segment active" data-tab="second">
+	  <Manager />
+        </div>
+      </div> 
     );
   }
 }
-
-export default App;
