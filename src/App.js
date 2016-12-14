@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div>
-          <button className="ui button">Follow</button>
-      <p>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <form className="ui form">
+        <div className="field">
+          <label>Meal Type</label>
+          <input type="text" name="meal-type" placeholder="Enter a meal option"></input>
+        </div> 
+          <button className="ui button">Submit</button>
+      </form>
     );
   }
 }
