@@ -1,5 +1,7 @@
 import React from 'react'
 
+import FoodList from './FoodList'
+
 export default class Manager extends React.Component {
     constructor(props) {
       super(props);
@@ -14,7 +16,10 @@ export default class Manager extends React.Component {
     }
     clickEdit(e) {
       e.preventDefault();
-      console.log('The link was clicked.');
+      console.log('The button was clicked.');
+      FoodList.getList().then(json => {
+	console.log(json);
+      });
     }
     clickDelete(e) {
       e.preventDefault();
