@@ -12,18 +12,24 @@ export default class Manager extends React.Component {
     
     clickAdd(e) {
       e.preventDefault();
-      console.log('The link was clicked.');
+      console.log('The add button was clicked.');
+      FoodList.addFood().then(json => {
+        console.log(json);
+      });
     }
     clickEdit(e) {
       e.preventDefault();
-      console.log('The button was clicked.');
+      console.log('The edit button was clicked.');
       FoodList.getList().then(json => {
 	console.log(json);
       });
     }
     clickDelete(e) {
       e.preventDefault();
-      console.log('The link was clicked.');
+      console.log('The del button was clicked.');
+      FoodList.delFood().then(json => {
+        console.log(json);
+      });
     }
     render() {
       return(
