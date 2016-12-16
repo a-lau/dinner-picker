@@ -6,9 +6,10 @@ import data from './data.json'
 export default class Manager extends React.Component {
     constructor(props) {
       super(props);
-      this.clickAdd= this.clickAdd.bind(this);
-      this.clickEdit= this.clickEdit.bind(this);
-      this.clickDelete= this.clickDelete.bind(this);
+      this.clickAdd = this.clickAdd.bind(this);
+      this.clickEdit = this.clickEdit.bind(this);
+      this.clickDelete = this.clickDelete.bind(this);
+      this.state = { foodData: data }
     }
     
     clickAdd(e) {
@@ -31,6 +32,17 @@ export default class Manager extends React.Component {
       FoodList.delFood().then(json => {
         console.log(json);
       });
+    }
+    listItems(props) {
+      return (
+	<div className="item">
+	  <div className="content">
+	    {this.state.data.map(function(item) {
+              return <div className="header" key={item.name}>{item.name}</div>
+            })}
+  	  </div>
+	</div>
+      )
     }
     render() {
       return(
