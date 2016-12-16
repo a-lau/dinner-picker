@@ -1,6 +1,7 @@
 import React from 'react'
 
 import FoodList from './FoodList'
+import data from './data.json'
 
 export default class Manager extends React.Component {
     constructor(props) {

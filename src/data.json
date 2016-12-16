@@ -1,0 +1,35 @@
+{
+    "foodList":[{
+		"name":		"Hamburgers",
+		"lastHad":	"5"
+	},
+	{
+		"name":         "Hotdogs",
+                "lastHad":      "1"
+        },
+        {
+		"name":         "Sushi",
+                "lastHad":      "2"
+        },
+        {
+		"name":         "Thai",
+                "lastHad":      "3"
+        },
+        {
+		"name":         "Chinese",
+                "lastHad":      "6"
+        },
+        {
+		"name":         "Pizza",
+                "lastHad":      "9"
+        },
+        {
+		"name":         "Cheese Steak",
+                "lastHad":      "10"
+        },
+        {
+		"name":         "Wings",
+                "lastHad":      "7"
+        }
+    ]
+}
