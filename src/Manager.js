@@ -33,11 +33,13 @@ export default class Manager extends React.Component {
         console.log(json);
       });
     }
-    listItems(props) {
+    listItems() {
+	console.log("hello?")
+	console.log( this.state.foodData )
       return (
 	<div className="item">
 	  <div className="content">
-	    {this.state.data.map(function(item) {
+	    {this.state.foodData.map(function(item) {
               return <div className="header" key={item.name}>{item.name}</div>
             })}
   	  </div>
@@ -45,14 +47,11 @@ export default class Manager extends React.Component {
       )
     }
     render() {
+      console.log( this.state.foodData )
       return(
 	<div>
   	  <div className="ui middle aligned selection list">
-	    <div className="item">
-	      <div className="content">
-	        <div className="header">Item One</div>
-	      </div>
-	    </div>
+	    {this.listItems()}
 	  </div>
 	  <form className="ui form">
             <div className="field">
