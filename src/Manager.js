@@ -9,7 +9,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      this.state = { foodData: data }
+      this.state = { foodData: data.foodList }
     }
     
     clickAdd(e) {
