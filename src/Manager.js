@@ -37,15 +37,17 @@ export default class Manager extends React.Component {
       console.log("hello?")
       console.log( this.state.foodData )
       return (
+	<div className="ui middle aligned selection list">
         {this.state.foodData.map(function(item) {
           return( 
-            <div className="item">
+            <div className="item" key={item.name}>
               <div className="content">
-	        <div className="header" key={item.name}>{item.name}</div>
+	        <div className="header">{item.name}</div>
 	      </div>
 	    </div>
 	  )
         })}
+	</div>
       )
     }
 
@@ -53,7 +55,7 @@ export default class Manager extends React.Component {
       console.log( this.state.foodData )
       return(
 	<div>
-  	  <div className="ui middle aligned selection list">
+  	  <div>
 	    {this.listItems()}
 	  </div>
 	  <form className="ui form">
