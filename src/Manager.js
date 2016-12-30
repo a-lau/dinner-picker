@@ -34,6 +34,9 @@ export default class Manager extends React.Component {
       });
     }
     listItems() {
+      FoodList.getList().then(json => {
+        console.log(json);
+      });
       return (
 	<div className="ui middle aligned selection list">
         {this.state.foodData.map(function(item) {
