@@ -22,7 +22,7 @@ export default class Manager extends React.Component {
     clickEdit(e) {
       e.preventDefault();
       console.log('The edit button was clicked.');
-      FoodList.getList().then(json => {
+      FoodList.editFood().then(json => {
 	console.log(json);
       });
     }

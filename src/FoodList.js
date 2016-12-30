@@ -10,6 +10,13 @@ const FoodList = {
          headers: { 'Content-Type': 'application/json' } })
       .then(response => response.json())
   },
+  editFood: function(params) {
+    return fetch('/api/v1/edit_food/',
+      { method:   'post',
+         body:    JSON.stringify(params),
+         headers: { 'Content-Type': 'application/json' } })
+      .then(response => response.json())
+  },
   delFood: function(params) {
     return fetch('/api/v1/del_food/', 
       { method:   'delete',

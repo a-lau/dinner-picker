@@ -12,6 +12,10 @@ app.post('/api/v1/add_food', function (req, res) {
   res.send({add: 'Add food'});
 })
 
+app.post('/api/v1/edit_food', function (req, res) {
+  res.send({edit: 'Edit food'});
+})
+
 app.delete('/api/v1/del_food', function (req, res) {
   res.send({del: 'Del Food'});
 }) 
