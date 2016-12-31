@@ -5,12 +5,9 @@ const db = new sqlite3.Database('foodList.db');
 
 // This responds a GET request for /list_food.
 app.get('/api/v1/list_food', function (req, res) {
-  console.log("api get request");
-  console.log(db);
   db.all('SELECT * FROM foodlist', function(err, row) {
-    console.log(row);
+    res.send(JSON.stringify(row));
   });
-  //res.send({list: 'Food List'});
 })
 
 app.post('/api/v1/add_food', function (req, res) {
@@ -58,4 +55,25 @@ var server = app.listen(3001, function () {
    var port = server.address().port
 
    console.log("Example app listening at http://%s:%s", host, port)
+
 })
+
+function cleanup () {
+  shutting_down = true;
+  server.close( function () {
+    console.log( "Closed out remaining connections.");
+    //Close db connections, other chores, etc.
+    db.close()
+    process.exit();
+  });
+    
+  setTimeout( function () {
+    console.error("Could not close connections in time, forcing shut down");
+    process.exit(1);
+  }, 30*1000);
+}
+			    
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
+
+
