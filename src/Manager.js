@@ -1,7 +1,6 @@
 import React from 'react'
 
 import FoodList from './FoodList'
-import data from './data.json'
 
 export default class Manager extends React.Component {
     constructor(props) {
@@ -9,7 +8,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      this.state = { foodData: data.foodList }
+      this.state = {jsonResults: null}
     }
     
     clickAdd(e) {
@@ -33,23 +32,38 @@ export default class Manager extends React.Component {
         console.log(json);
       });
     }
-    listItems() {
+
+    componentDidMount() {
+      console.log("mount?")
       FoodList.getList().then(json => {
-        console.log(json);
-      });
-      return (
-	<div className="ui middle aligned selection list">
-        {this.state.foodData.map(function(item) {
-          return( 
-            <div className="item" key={item.name}>
-              <div className="content">
-	        <div className="header">{item.name}</div>
+	const jsonResults = json
+	this.setState(jsonResults: jsonResults)
+        console.log("inside response")
+        console.log(jsonResults)
+      }); 
+    }
+
+    listItems() {
+	    console.log(this.state.jsonResults)
+      if (!!!this.state.jsonResults) {
+	console.log("should be here")
+        return <div>Loading...</div>
+      } else {
+	      console.log("why we here?")
+        return (
+	  <div className="ui middle aligned selection list">
+          {this.state.jsonResults.map(function(item) {
+            return( 
+              <div className="item" key={item.name}>
+                <div className="content">
+	          <div className="header">{item.name}</div>
+	        </div>
 	      </div>
-	    </div>
-	  )
-        })}
-	</div>
-      )
+	    )
+          })}
+	  </div>
+        )
+      }
     }
 
     render() {
