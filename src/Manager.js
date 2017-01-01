@@ -34,22 +34,21 @@ export default class Manager extends React.Component {
     }
 
     componentDidMount() {
-      console.log("mount?")
+      console.log("inside mount")
       FoodList.getList().then(json => {
 	const jsonResults = json
 	this.setState(jsonResults: jsonResults)
-        console.log("inside response")
-        console.log(jsonResults)
+        console.log("inside response" + jsonResults)
+	console.log("state " + this.state.jsonResults)
       }); 
     }
 
     listItems() {
-	    console.log(this.state.jsonResults)
+      console.log("json beginning of listItems() " + this.state.jsonResults)
       if (!!!this.state.jsonResults) {
-	console.log("should be here")
         return <div>Loading...</div>
       } else {
-	      console.log("why we here?")
+	console.log("inside else statement, before return")
         return (
 	  <div className="ui middle aligned selection list">
           {this.state.jsonResults.map(function(item) {
