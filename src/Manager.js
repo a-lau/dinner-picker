@@ -8,7 +8,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      this.state = {jsonResults: null}
+      this.state = {jsonResults:[]} 
     }
     
     clickAdd(e) {
@@ -34,21 +34,15 @@ export default class Manager extends React.Component {
     }
 
     componentDidMount() {
-      console.log("inside mount")
       FoodList.getList().then(json => {
-	const jsonResults = json
-	this.setState(jsonResults: jsonResults)
-        console.log("inside response" + jsonResults)
-	console.log("state " + this.state.jsonResults)
+	this.setState({jsonResults: json})
       }); 
     }
 
     listItems() {
-      console.log("json beginning of listItems() " + this.state.jsonResults)
       if (!!!this.state.jsonResults) {
         return <div>Loading...</div>
       } else {
-	console.log("inside else statement, before return")
         return (
 	  <div className="ui middle aligned selection list">
           {this.state.jsonResults.map(function(item) {
