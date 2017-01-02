@@ -8,7 +8,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      this.state = {jsonResults:[]} 
+      this.state = {jsonResults: null} 
     }
     
     clickAdd(e) {
