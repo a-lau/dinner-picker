@@ -14,23 +14,29 @@ export default class Manager extends React.Component {
     clickAdd(e) {
       e.preventDefault();
       console.log('The add button was clicked.');
-      FoodList.addFood().then(json => {
-        console.log(json);
-      });
+	const newFood = {
+	  name: 'Pizza',
+	  key: 'Pizza'
+	};
+      FoodList.addFood(newFood)
     }
     clickEdit(e) {
       e.preventDefault();
       console.log('The edit button was clicked.');
-      FoodList.editFood().then(json => {
-	console.log(json);
-      });
+      const editFood = {
+        name: 'Pizza',
+        key: 'Pizza'
+      };
+      FoodList.editFood(editFood)
     }
     clickDelete(e) {
       e.preventDefault();
       console.log('The del button was clicked.');
-      FoodList.delFood().then(json => {
-        console.log(json);
-      });
+      const delFood = {
+        name: 'Pizza',
+        key: 'Pizza'
+      };
+      FoodList.delFood(delFood)
     }
 
     componentDidMount() {
@@ -82,4 +88,6 @@ export default class Manager extends React.Component {
       );
 
     }
+    // will need to do something with ref for callback for add:  ref={(input) => { this.textInput = input; }}
+    // https://facebook.github.io/react/docs/refs-and-the-dom.html
 }
