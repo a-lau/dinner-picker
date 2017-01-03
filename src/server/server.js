@@ -3,6 +3,13 @@ const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('foodList.db');
 
+// Setting up parsing of post data
+const bodyParser = require('body-parser');
+app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 // This responds a GET request for /list_food.
 app.get('/api/v1/list_food', function (req, res) {
   db.all('SELECT * FROM foodlist', function(err, row) {
@@ -11,15 +18,19 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
-  res.send({add: 'Add food'});
+  //do something with req and db
+  console.log("add post");
+  console.log(req.body.name);
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
-  res.send({edit: 'Edit food'});
+  console.log("edit post");
+  console.log(req.body.name);
 })
 
 app.delete('/api/v1/del_food', function (req, res) {
-  res.send({del: 'Del Food'});
+  console.log("del post");
+  console.log(req.body.name);
 }) 
 
 
@@ -46,8 +57,6 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
       console.log("SQL Table foodList already initialized.");
     }
 });
-
-//db.close();
 
 var server = app.listen(3001, function () {
 
