@@ -8,7 +8,7 @@ const FoodList = {
       { method:   'post',
          body:    JSON.stringify(params),
          headers: { 'Content-Type': 'application/json' } })
-      .then(response => response.json())
+      .then(response => { if (response.ok) console.log(response) })
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',

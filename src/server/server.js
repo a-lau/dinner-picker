@@ -26,7 +26,7 @@ app.post('/api/v1/add_food', function (req, res) {
       next(err);
    } else {
      console.log("success?");
-     res.sendStatus(200);
+     res.send(JSON.stringify({status: "pizza"}));
    }
  }); 
 })
@@ -44,6 +44,7 @@ app.delete('/api/v1/del_food', function (req, res) {
       next(err);
     } else {
       res.sendStatus(200);
+     return "pizza"
     }
   });
 }) 

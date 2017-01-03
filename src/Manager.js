@@ -13,12 +13,13 @@ export default class Manager extends React.Component {
     
     clickAdd(e) {
       e.preventDefault();
+      console.log(this.refs.meal_input.value);
       console.log('The add button was clicked.');
 	const newFood = {
 	  name: 'Pizza',
 	  key: 'Pizza'
 	};
-      FoodList.addFood(newFood)
+      FoodList.addFood(newFood).then((res) => { this.state.newData(res) })
     }
     clickEdit(e) {
       e.preventDefault();
@@ -77,8 +78,8 @@ export default class Manager extends React.Component {
 	    <div className="menu">
 	      <div className="header">Input New Item</div>
 	      <div className="ui left input">
-                <input type="text" name="meal-type" placeholder="Enter a meal option..."></input>
-		<button className="ui button" onClick={this.clickAdd}>Add</button>
+                <input type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal option..."></input>
+		            <button className="ui button" onClick={this.clickAdd}>Add</button>
               </div> 
             </div>
           </div>
