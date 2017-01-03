@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// This responds a GET request for /list_food.
+// This responds to a GET request for /list_food.
 app.get('/api/v1/list_food', function (req, res) {
   db.all('SELECT * FROM foodlist', function(err, row) {
     res.send(JSON.stringify(row));
@@ -18,9 +18,17 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
-  //do something with req and db
   console.log("add post");
-  console.log(req.body.name);
+  const sqlRequest = "INSERT INTO 'foodList' (name, key) " + 
+	             "VALUES('" + req.body.name + "', '" + req.body.key + "')"
+  db.run(sqlRequest, function(err) {
+    if(err !== null) {
+      next(err);
+   } else {
+     console.log("success?");
+     res.sendStatus(200);
+   }
+ }); 
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
@@ -30,7 +38,14 @@ app.post('/api/v1/edit_food', function (req, res) {
 
 app.delete('/api/v1/del_food', function (req, res) {
   console.log("del post");
-  console.log(req.body.name);
+  db.run("DELETE FROM foodList WHERE key='" + req.body.key + "'",
+         function(err) {
+    if(err !== null) {
+      next(err);
+    } else {
+      res.sendStatus(200);
+    }
+  });
 }) 
 
 
