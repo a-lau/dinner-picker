@@ -1,2 +1,4 @@
 node_modules
 semantic
+src/server/*.db
+src/server/foodList.db
