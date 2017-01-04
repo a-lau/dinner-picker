@@ -25,21 +25,17 @@ export default class Manager extends React.Component {
       })
 	      //.then((res) => { this.state.newData(res) })
     }
-    clickEdit(e) {
-      e.preventDefault();
+    clickEdit(props) {
       console.log('The edit button was clicked.');
       const editFood = {
-        name: 'Pizza',
-        key: 'Pizza'
+        key: props 
       };
       FoodList.editFood(editFood)
     }
-    clickDelete(e) {
-      e.preventDefault();
+    clickDelete(props) {
       console.log('The del button was clicked.');
       const delFood = {
-        name: 'Pizza',
-        key: 'Pizza'
+        key: props 
       };
       FoodList.delFood(delFood).then((res) => {
         console.log(res)
@@ -63,8 +59,8 @@ export default class Manager extends React.Component {
             return( 
               <div className="item" key={item.name}>
 	        <div className="right floated content">
-		  <i className="edit icon" onClick={this.clickEdit}></i>
-		  <i className="trash icon" onClick={this.clickDelete}></i>
+		  <i className="edit icon" onClick={() => this.clickEdit(item.name)}></i>
+		  <i className="trash icon" onClick={() => this.clickDelete(item.name)}></i>
 		</div>
                 <div className="content">
 	          <div className="header">{item.name}</div>
