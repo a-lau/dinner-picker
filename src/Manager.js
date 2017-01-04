@@ -13,11 +13,10 @@ export default class Manager extends React.Component {
     
     clickAdd(e) {
       e.preventDefault();
-      //console.log(this.refs.meal_input.value);
       console.log('The add button was clicked.');
 	const newFood = {
-	  name: 'Pizza',
-	  key: 'Pizza'
+	  name: this.refs.meal_input.value,
+	  key: this.refs.meal_input.value
 	};
       FoodList.addFood(newFood).then((res) => {
 	 console.log(res)
@@ -63,12 +62,16 @@ export default class Manager extends React.Component {
           {this.state.jsonResults.map(function(item) {
             return( 
               <div className="item" key={item.name}>
+	        <div className="right floated content">
+		  <i className="edit icon" onClick={this.clickEdit}></i>
+		  <i className="trash icon" onClick={this.clickDelete}></i>
+		</div>
                 <div className="content">
 	          <div className="header">{item.name}</div>
 	        </div>
 	      </div>
 	    )
-          })}
+          }, this)}
 	  </div>
         )
       }
@@ -91,12 +94,8 @@ export default class Manager extends React.Component {
               </div> 
             </div>
           </div>
-          <button className="ui button" onClick={this.clickEdit}>Edit</button>
-	  <button className="ui button" onClick={this.clickDelete}>Delete Item</button>
         </div>
       );
 
     }
-    // will need to do something with ref for callback for add:  ref={(input) => { this.textInput = input; }}
-    // https://facebook.github.io/react/docs/refs-and-the-dom.html
 }
