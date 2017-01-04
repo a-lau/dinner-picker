@@ -13,13 +13,18 @@ export default class Manager extends React.Component {
     
     clickAdd(e) {
       e.preventDefault();
-      console.log(this.refs.meal_input.value);
+      //console.log(this.refs.meal_input.value);
       console.log('The add button was clicked.');
 	const newFood = {
 	  name: 'Pizza',
 	  key: 'Pizza'
 	};
-      FoodList.addFood(newFood).then((res) => { this.state.newData(res) })
+      FoodList.addFood(newFood).then((res) => {
+	 console.log(res)
+	 // do some toast message that it got added properly
+	 this.setState({jsonResults: res})
+      })
+	      //.then((res) => { this.state.newData(res) })
     }
     clickEdit(e) {
       e.preventDefault();
@@ -37,7 +42,10 @@ export default class Manager extends React.Component {
         name: 'Pizza',
         key: 'Pizza'
       };
-      FoodList.delFood(delFood)
+      FoodList.delFood(delFood).then((res) => {
+        console.log(res)
+	this.setState({jsonResults: res})
+      })
     }
 
     componentDidMount() {

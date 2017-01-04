@@ -25,8 +25,11 @@ app.post('/api/v1/add_food', function (req, res) {
     if(err !== null) {
       next(err);
    } else {
-     console.log("success?");
-     res.send(JSON.stringify({status: "pizza"}));
+     console.log("add success");
+     //res.send(JSON.stringify({key: req.body.key}));
+     db.all('SELECT * FROM foodlist', function(err, row) {
+       res.send(JSON.stringify(row));
+     });
    }
  }); 
 })
@@ -43,8 +46,11 @@ app.delete('/api/v1/del_food', function (req, res) {
     if(err !== null) {
       next(err);
     } else {
-      res.sendStatus(200);
-     return "pizza"
+      console.log("del success");
+      //res.send(JSON.stringify({key: req.body.key}));
+      db.all('SELECT * FROM foodlist', function(err, row) {
+        res.send(JSON.stringify(row));
+      });
     }
   });
 }) 

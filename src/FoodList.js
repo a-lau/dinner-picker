@@ -8,14 +8,20 @@ const FoodList = {
       { method:   'post',
          body:    JSON.stringify(params),
          headers: { 'Content-Type': 'application/json' } })
-      .then(response => { if (response.ok) console.log(response) })
+      .then(response => response.json())
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',
       { method:   'post',
          body:    JSON.stringify(params),
          headers: { 'Content-Type': 'application/json' } })
-      .then(response => response.json())
+      .then(response => { 
+        if (response.ok) {
+          console.log(response) 
+        } else {
+	  console.log("resp not okay")
+	}
+      })
   },
   delFood: function(params) {
     return fetch('/api/v1/del_food/', 
@@ -23,6 +29,7 @@ const FoodList = {
         body:     JSON.stringify(params),
         headers:  { 'Content-Type': 'application/json'  }})
       .then(response => response.json())
+      //.then(response => { if (response.ok) console.log(response) })
   }
 }
 
