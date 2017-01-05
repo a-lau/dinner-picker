@@ -18,7 +18,6 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
-  console.log("add post");
   const sqlRequest = "INSERT INTO 'foodList' (name, key) " + 
 	             "VALUES('" + req.body.name + "', '" + req.body.key + "')"
   db.run(sqlRequest, function(err) {
@@ -34,7 +33,6 @@ app.post('/api/v1/add_food', function (req, res) {
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
-  console.log("edit post");
   const sqlRequest = "UPDATE foodList SET name='" + req.body.key + "' " +
                      "WHERE name='" + req.body.key + "'"
   db.run(sqlRequest, function(err) {
@@ -50,7 +48,6 @@ app.post('/api/v1/edit_food', function (req, res) {
 })
 
 app.delete('/api/v1/del_food', function (req, res) {
-  console.log("del post");
   db.run("DELETE FROM foodList WHERE key='" + req.body.key + "'",
          function(err) {
     if(err !== null) {
