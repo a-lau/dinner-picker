@@ -1,12 +1,12 @@
 import React from 'react'
 
-import FoodList from './FoodList'
+import FoodAPIs from './FoodAPIs'
 
 export default class Manager extends React.Component {
     constructor(props) {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
-      this.clickEdit = this.clickEdit.bind(this);
+      //this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
       this.state = {jsonResults: null} 
     }
@@ -18,20 +18,22 @@ export default class Manager extends React.Component {
 	  name: this.refs.meal_input.value,
 	  key: this.refs.meal_input.value
 	};
-      FoodList.addFood(newFood).then((res) => {
+      FoodAPIs.addFood(newFood).then((res) => {
 	 console.log(res)
 	 // do some toast message that it got added properly
 	 this.setState({jsonResults: res})
       })
 	      //.then((res) => { this.state.newData(res) })
     }
-    clickEdit(props) {
+    startEdit(props) {
+      console.log("Start edit")
+    }
+    saveEdit(props) {
       console.log('The edit button was clicked.');
       const editFood = {
         key: props 
       };
-      FoodList.editFood(editFood).then((res) => {
-	console.log(res)
+      FoodAPIs.editFood(editFood).then((res) => {
 	this.setState({jsonResults: res})
       })
     }
@@ -40,14 +42,13 @@ export default class Manager extends React.Component {
       const delFood = {
         key: props 
       };
-      FoodList.delFood(delFood).then((res) => {
-        console.log(res)
+      FoodAPIs.delFood(delFood).then((res) => {
 	this.setState({jsonResults: res})
       })
     }
 
     componentDidMount() {
-      FoodList.getList().then(json => {
+      FoodAPIs.getList().then(json => {
 	this.setState({jsonResults: json})
       }); 
     }
@@ -62,7 +63,7 @@ export default class Manager extends React.Component {
             return( 
               <div className="item" key={item.name}>
 	        <div className="right floated content">
-		  <i className="edit icon" onClick={() => this.clickEdit(item.key)}></i>
+		  <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
 		  <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
 		</div>
                 <div className="content">

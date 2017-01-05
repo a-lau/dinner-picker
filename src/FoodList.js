@@ -1,36 +1,27 @@
-const FoodList = {
-  getList: function() {
-    return fetch('/api/v1/list_food/', { 'method': 'get'})
-      .then(response => response.json())
-  },
-  addFood: function(params) {
-    return fetch('/api/v1/add_food/',
-      { method:   'post',
-         body:    JSON.stringify(params),
-         headers: { 'Content-Type': 'application/json' } })
-      .then(response => response.json())
-  },
-  editFood: function(params) {
-    return fetch('/api/v1/edit_food/',
-      { method:   'post',
-         body:    JSON.stringify(params),
-         headers: { 'Content-Type': 'application/json' } })
-      .then(response => { 
-        if (response.ok) {
-	  return response.json()
-        } else {
-	  console.log("bad response")
-	}
-      })
-  },
-  delFood: function(params) {
-    return fetch('/api/v1/del_food/', 
-      { method:   'delete',
-        body:     JSON.stringify(params),
-        headers:  { 'Content-Type': 'application/json'  }})
-      .then(response => response.json())
-      //.then(response => { if (response.ok) console.log(response) })
+import React from 'react'
+
+export default class FoodList extends React.Component {
+  listItems() {
+    if (!!!this.state.jsonResults) {
+      return <div>Loading...</div>
+    } else {
+      return (
+        <div className="ui middle aligned selection list">
+	  {this.state.jsonResults.map(function(item) {
+	    return(
+	      <div className="item" key={item.name}>
+	        <div className="right floated content">
+		  <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
+		  <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
+		</div>
+		<div className="content">
+		  <div className="header">{item.name}</div>
+		</div>
+	      </div>
+	    )
+	  }, this)}
+	</div>
+      )
+    }
   }
 }
-
-export default FoodList;
