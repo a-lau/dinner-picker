@@ -25,7 +25,6 @@ app.post('/api/v1/add_food', function (req, res) {
     if(err !== null) {
       next(err);
    } else {
-     console.log("add success");
      //res.send(JSON.stringify({key: req.body.key}));
      db.all('SELECT * FROM foodlist', function(err, row) {
        res.send(JSON.stringify(row));
@@ -36,7 +35,18 @@ app.post('/api/v1/add_food', function (req, res) {
 
 app.post('/api/v1/edit_food', function (req, res) {
   console.log("edit post");
-  console.log(req.body.name);
+  const sqlRequest = "UPDATE foodList SET name='" + req.body.key + "' " +
+                     "WHERE name='" + req.body.key + "'"
+  db.run(sqlRequest, function(err) {
+    if(err !== null) {
+      next(err);
+    } else {
+      //res.send(JSON.stringify({key: req.body.key}));
+      db.all('SELECT * FROM foodlist', function(err, row) {
+        res.send(JSON.stringify(row));
+      });
+    }
+  });
 })
 
 app.delete('/api/v1/del_food', function (req, res) {
@@ -46,7 +56,6 @@ app.delete('/api/v1/del_food', function (req, res) {
     if(err !== null) {
       next(err);
     } else {
-      console.log("del success");
       //res.send(JSON.stringify({key: req.body.key}));
       db.all('SELECT * FROM foodlist', function(err, row) {
         res.send(JSON.stringify(row));
@@ -93,7 +102,6 @@ function cleanup () {
   shutting_down = true;
   server.close( function () {
     console.log( "Closed out remaining connections.");
-    //Close db connections, other chores, etc.
     db.close()
     process.exit();
   });
