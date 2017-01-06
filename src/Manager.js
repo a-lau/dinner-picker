@@ -1,6 +1,7 @@
 import React from 'react'
 
 import FoodAPIs from './FoodAPIs'
+import FoodList from './FoodList'
 
 export default class Manager extends React.Component {
     constructor(props) {
@@ -8,7 +9,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       //this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      this.state = {jsonResults: null} 
+      //this.state = {jsonResults: null} 
     }
     
     clickAdd(e) {
@@ -19,7 +20,6 @@ export default class Manager extends React.Component {
 	  key: this.refs.meal_input.value
 	};
       FoodAPIs.addFood(newFood).then((res) => {
-	 console.log(res)
 	 // do some toast message that it got added properly
 	 this.setState({jsonResults: res})
       })
@@ -47,13 +47,13 @@ export default class Manager extends React.Component {
       })
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
       FoodAPIs.getList().then(json => {
 	this.setState({jsonResults: json})
       }); 
-    }
+    }*/
 
-    listItems() {
+    /*listItems() {
       if (!!!this.state.jsonResults) {
         return <div>Loading...</div>
       } else {
@@ -75,13 +75,13 @@ export default class Manager extends React.Component {
 	  </div>
         )
       }
-    }
+    }*/
 
     render() {
       return(
 	<div>
   	  <div>
-	    {this.listItems()}
+	    <FoodList />
 	  </div>
 	  <div className="ui icon simple labeled dropdown button">
 	    <i className="plus icon"></i>

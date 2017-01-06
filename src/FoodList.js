@@ -1,7 +1,30 @@
 import React from 'react'
 
+import FoodAPIs from './FoodAPIs'
+
 export default class FoodList extends React.Component {
-  listItems() {
+ 
+  constructor(props) {
+    super(props);
+    this.state = {jsonResults: null};
+  }
+
+  componentDidMount() {
+    FoodAPIs.getList().then(json => {
+      this.setState({jsonResults: json})
+    });
+  }
+
+  clickDelete(props) {
+    const delFood = {
+      key: props 
+    };
+    FoodAPIs.delFood(delFood).then((res) => {
+      this.setState({jsonResults: res})
+    })
+  }
+
+  render() {
     if (!!!this.state.jsonResults) {
       return <div>Loading...</div>
     } else {
