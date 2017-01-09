@@ -6,13 +6,13 @@ export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: null};
+    console.log(props)
+    this.state = {jsonResults: props.fl};
   }
 
-  componentDidMount() {
-    FoodAPIs.getList().then(json => {
-      this.setState({jsonResults: json})
-    });
+  componentWillReceiveProps(nextProps)
+  {
+    this.setState({jsonResults: nextProps})
   }
 
   clickDelete(props) {
@@ -25,12 +25,14 @@ export default class FoodList extends React.Component {
   }
 
   render() {
+	  console.log("render foodlist")
+		  console.log(this.state.jsonResults)
     if (!!!this.state.jsonResults) {
       return <div>Loading...</div>
     } else {
       return (
         <div className="ui middle aligned selection list">
-	  {this.state.jsonResults.map(function(item) {
+	  {this.state.jsonResults.fl.map(function(item) {
 	    return(
 	      <div className="item" key={item.name}>
 	        <div className="right floated content">

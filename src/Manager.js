@@ -9,7 +9,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       //this.clickEdit = this.clickEdit.bind(this);
       this.clickDelete = this.clickDelete.bind(this);
-      //this.state = {jsonResults: null} 
+      this.state = {jsonResults: null} 
     }
     
     clickAdd(e) {
@@ -47,41 +47,19 @@ export default class Manager extends React.Component {
       })
     }
 
-    /*componentDidMount() {
+    componentDidMount() {
       FoodAPIs.getList().then(json => {
 	this.setState({jsonResults: json})
       }); 
-    }*/
-
-    /*listItems() {
-      if (!!!this.state.jsonResults) {
-        return <div>Loading...</div>
-      } else {
-        return (
-	  <div className="ui middle aligned selection list">
-          {this.state.jsonResults.map(function(item) {
-            return( 
-              <div className="item" key={item.name}>
-	        <div className="right floated content">
-		  <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
-		  <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
-		</div>
-                <div className="content">
-	          <div className="header">{item.name}</div>
-	        </div>
-	      </div>
-	    )
-          }, this)}
-	  </div>
-        )
-      }
-    }*/
+    }
 
     render() {
+	console.log("render manager")
+		console.log(this.state.jsonResults)
       return(
 	<div>
   	  <div>
-	    <FoodList />
+	    <FoodList fl={this.state.jsonResults}/>
 	  </div>
 	  <div className="ui icon simple labeled dropdown button">
 	    <i className="plus icon"></i>
