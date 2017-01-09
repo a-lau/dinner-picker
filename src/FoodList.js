@@ -7,7 +7,8 @@ export default class FoodList extends React.Component {
   constructor(props) {
     super(props);
     console.log(props)
-    this.state = {jsonResults: props.fl};
+    this.state = {jsonResults: props.fl}
+    this.state = {editing: ""}
   }
 
   componentWillReceiveProps(nextProps)
@@ -24,26 +25,32 @@ export default class FoodList extends React.Component {
     })
   }
 
+  renderItemOrEditField(item) {
+    if ( this.state.editing == item.id ) {
+      // Render edit fields
+    } else {
+      return(
+        <div className="item" key={item.name}>
+          <div className="right floated content">
+            <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
+            <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
+          </div>
+          <div className="content">
+            <div className="header">{item.name}</div>
+          </div>
+        </div>
+      )
+    }
+  }
+
   render() {
-	  console.log("render foodlist")
-		  console.log(this.state.jsonResults)
     if (!!!this.state.jsonResults) {
       return <div>Loading...</div>
     } else {
       return (
         <div className="ui middle aligned selection list">
 	  {this.state.jsonResults.fl.map(function(item) {
-	    return(
-	      <div className="item" key={item.name}>
-	        <div className="right floated content">
-		  <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
-		  <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
-		</div>
-		<div className="content">
-		  <div className="header">{item.name}</div>
-		</div>
-	      </div>
-	    )
+	    return this.renderItemOrEditField(item)
 	  }, this)}
 	</div>
       )
