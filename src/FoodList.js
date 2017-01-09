@@ -13,7 +13,7 @@ export default class FoodList extends React.Component {
 
   componentWillReceiveProps(nextProps)
   {
-    this.setState({jsonResults: nextProps})
+    this.setState({jsonResults: nextProps.fl})
   }
 
   clickDelete(props) {
@@ -26,7 +26,7 @@ export default class FoodList extends React.Component {
   }
 
   renderItemOrEditField(item) {
-    if ( this.state.editing == item.id ) {
+    if ( this.state.editing === item.key ) {
       // Render edit fields
     } else {
       return(
@@ -49,7 +49,7 @@ export default class FoodList extends React.Component {
     } else {
       return (
         <div className="ui middle aligned selection list">
-	  {this.state.jsonResults.fl.map(function(item) {
+	  {this.state.jsonResults.map(function(item) {
 	    return this.renderItemOrEditField(item)
 	  }, this)}
 	</div>
