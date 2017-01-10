@@ -8,7 +8,7 @@ export default class FoodList extends React.Component {
     super(props);
     console.log(props)
     this.state = {jsonResults: props.fl}
-    this.state = {editing: ""}
+    this.state = {editing: null}
   }
 
   componentWillReceiveProps(nextProps)
@@ -25,14 +25,38 @@ export default class FoodList extends React.Component {
     })
   }
 
+  toggleEdit(itemKey) {
+    this.setState({editing: itemKey})
+  }
+
+  handleEvent(e) {
+    if ( e.keyCode === 13 ) {
+      let target = e.target,
+	updatedItem = {};
+      updatedItem.key = target.value;
+      updatedItem.name = target.value;
+      console.log(updatedItem)
+      FoodAPIs.editFood(updatedItem).then((res) => {
+	console.log(res)
+        this.setState({jsonResults: res})
+	this.setState({editing: null})
+      })
+    }
+  }
+
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
-      // Render edit fields
+      console.log("render edit inline")
+      return(
+	<div className="ui input focus" key={item.name}>
+	  <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key}></input>
+        </div>
+      )
     } else {
       return(
         <div className="item" key={item.name}>
           <div className="right floated content">
-            <i className="edit icon" onClick={() => this.startEdit(item.key)}></i>
+            <i className="edit icon" onClick={() => this.toggleEdit(item.key)}></i>
             <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
           </div>
           <div className="content">
