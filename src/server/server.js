@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// This responds to a GET request for /list_food.
+// API Calls
 app.get('/api/v1/list_food', function (req, res) {
   db.all('SELECT * FROM foodlist', function(err, row) {
     res.send(JSON.stringify(row));
@@ -18,8 +18,8 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
-  const sqlRequest = "INSERT INTO 'foodList' (name, key) " + 
-	             "VALUES('" + req.body.name + "', '" + req.body.key + "')"
+  const sqlRequest = "INSERT INTO 'foodList' (name, lastUsed, weight, key) " + 
+	             "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "')"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
       next(err);
@@ -34,7 +34,7 @@ app.post('/api/v1/add_food', function (req, res) {
 
 app.post('/api/v1/edit_food', function (req, res) {
   const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
-	                                  "key='" + req.body.key + "' " +
+	             "lastUsed='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
                      "WHERE name='" + req.body.old + "'"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
@@ -73,6 +73,8 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
     else if(rows === undefined) {
       db.run('CREATE TABLE "foodList" ' +  
              '("name" TEXT, ' + 
+	     '"lastUsed" TEXT, ' +
+	     '"weight" INTEGER, ' +
              '"key" TEXT)', function(err) {
       if(err != null) {
         console.log(err);
