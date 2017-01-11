@@ -33,8 +33,9 @@ app.post('/api/v1/add_food', function (req, res) {
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
-  const sqlRequest = "UPDATE foodList SET name='" + req.body.key + "' " +
-                     "WHERE name='" + req.body.key + "'"
+  const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
+	                                  "key='" + req.body.key + "' " +
+                     "WHERE name='" + req.body.old + "'"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
       next(err);

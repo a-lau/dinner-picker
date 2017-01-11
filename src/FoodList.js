@@ -40,6 +40,7 @@ export default class FoodList extends React.Component {
 	updatedItem = {};
       updatedItem.key = target.value;
       updatedItem.name = target.value;
+      updatedItem.old = this.state.editing;
       FoodAPIs.editFood(updatedItem).then((res) => {
         this.setState({jsonResults: res})
 	this.setState({editing: null})
