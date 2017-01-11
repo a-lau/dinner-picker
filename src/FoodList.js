@@ -6,7 +6,6 @@ export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {jsonResults: props.fl}
     this.state = {editing: null}
   }
