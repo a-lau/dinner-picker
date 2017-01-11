@@ -11,9 +11,13 @@ export default class FoodList extends React.Component {
     this.state = {editing: null}
   }
 
-  componentWillReceiveProps(nextProps)
-  {
+  componentWillReceiveProps(nextProps) {
     this.setState({jsonResults: nextProps.fl})
+  }
+
+  focus() {
+	  console.log("focus call?")
+    this.textInput.focus();
   }
 
   clickDelete(props) {
@@ -26,6 +30,7 @@ export default class FoodList extends React.Component {
   }
 
   toggleEdit(itemKey) {
+    //this.setState({editing: itemKey}, this.focus().bind(this))
     this.setState({editing: itemKey})
   }
 
@@ -35,9 +40,7 @@ export default class FoodList extends React.Component {
 	updatedItem = {};
       updatedItem.key = target.value;
       updatedItem.name = target.value;
-      console.log(updatedItem)
       FoodAPIs.editFood(updatedItem).then((res) => {
-	console.log(res)
         this.setState({jsonResults: res})
 	this.setState({editing: null})
       })
@@ -46,10 +49,11 @@ export default class FoodList extends React.Component {
 
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
-      console.log("render edit inline")
       return(
-	<div className="ui input focus" key={item.name}>
-	  <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key}></input>
+	<div className="item" key={item.name}>
+	  <div className="ui input">
+	    <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} ref={(input) => {this.textInput=input}}></input>
+          </div>
         </div>
       )
     } else {

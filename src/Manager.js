@@ -7,8 +7,6 @@ export default class Manager extends React.Component {
     constructor(props) {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
-      //this.clickEdit = this.clickEdit.bind(this);
-      this.clickDelete = this.clickDelete.bind(this);
       this.state = {jsonResults: null} 
     }
     
@@ -54,8 +52,6 @@ export default class Manager extends React.Component {
     }
 
     render() {
-	console.log("render manager")
-		console.log(this.state.jsonResults)
       return(
 	<div>
   	  <div>
