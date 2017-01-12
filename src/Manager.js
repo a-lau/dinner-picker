@@ -16,7 +16,7 @@ export default class Manager extends React.Component {
 	const newFood = {
 	  name: this.refs.meal_input.value,
 	  key: this.refs.meal_input.value,
-          date: "10:08",
+          date: "8",
 	  weight: 2
 	};
       FoodAPIs.addFood(newFood).then((res) => {

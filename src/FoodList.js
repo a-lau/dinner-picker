@@ -42,7 +42,7 @@ export default class FoodList extends React.Component {
       updatedItem.name = target.value;
       updatedItem.old = this.state.editing;
       updatedItem.weight = 2;
-      updatedItem.date = "10:10";
+      updatedItem.date = "10";
       FoodAPIs.editFood(updatedItem).then((res) => {
         this.setState({jsonResults: res})
 	this.setState({editing: null})
