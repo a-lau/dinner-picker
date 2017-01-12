@@ -9,13 +9,15 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.state = {jsonResults: null} 
     }
-    
-    clickAdd(e) {
+   
+    clickAdd(e) { 
       e.preventDefault();
       console.log('The add button was clicked.');
 	const newFood = {
 	  name: this.refs.meal_input.value,
-	  key: this.refs.meal_input.value
+	  key: this.refs.meal_input.value,
+          date: "10:08",
+	  weight: 2
 	};
       FoodAPIs.addFood(newFood).then((res) => {
 	 // do some toast message that it got added properly

@@ -8,14 +8,15 @@ export default class FoodList extends React.Component {
     super(props);
     this.state = {jsonResults: props.fl}
     this.state = {editing: null}
+    this.focus = this.focus.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({jsonResults: nextProps.fl})
   }
-
   focus() {
 	  console.log("focus call?")
+		  console.log(this.textInput)
     this.textInput.focus();
   }
 
@@ -29,7 +30,7 @@ export default class FoodList extends React.Component {
   }
 
   toggleEdit(itemKey) {
-    //this.setState({editing: itemKey}, this.focus().bind(this))
+    //this.setState({editing: itemKey}, this.focus())
     this.setState({editing: itemKey})
   }
 
@@ -40,6 +41,8 @@ export default class FoodList extends React.Component {
       updatedItem.key = target.value;
       updatedItem.name = target.value;
       updatedItem.old = this.state.editing;
+      updatedItem.weight = 2;
+      updatedItem.date = "10:10";
       FoodAPIs.editFood(updatedItem).then((res) => {
         this.setState({jsonResults: res})
 	this.setState({editing: null})
