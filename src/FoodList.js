@@ -6,8 +6,9 @@ export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: props.fl, editing: null}
+    this.state = {jsonResults: props.fl, editing: null, selectValue: 1}
     this.focus = this.focus.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,6 +34,10 @@ export default class FoodList extends React.Component {
     this.setState({editing: itemKey})
   }
 
+  handleChange(e) {
+    this.setState({selectValue:e.target.value});
+  }
+
   handleEvent(e) {
     if ( e.keyCode === 13 ) {
       let target = e.target,
@@ -40,7 +45,7 @@ export default class FoodList extends React.Component {
       updatedItem.key = target.value;
       updatedItem.name = target.value;
       updatedItem.old = this.state.editing;
-      updatedItem.weight = 2;
+      updatedItem.weight = this.state.selectValue;
       updatedItem.date = "10";
       FoodAPIs.editFood(updatedItem).then((res) => {
         this.setState({jsonResults: res})
@@ -55,6 +60,18 @@ export default class FoodList extends React.Component {
 	<div className="item" key={item.name}>
 	  <div className="ui input">
 	    <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} ref={(input) => {this.textInput=input}}></input>
+	    <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
+	      <option value="10">10</option>
+	      <option value="9">9</option>
+	      <option value="8">8</option>
+	      <option value="7">7</option>
+	      <option value="6">6</option>
+	      <option value="5">5</option>
+	      <option value="4">4</option>
+	      <option value="3">3</option>
+	      <option value="2">2</option>
+	      <option value="1">1</option>
+	    </select>
           </div>
         </div>
       )
