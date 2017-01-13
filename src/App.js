@@ -9,7 +9,8 @@ export default class App extends React.Component {
     super(props);
     this.clickFirst=this.clickFirst.bind(this);
     this.clickSecond=this.clickSecond.bind(this);
-    this.state={lastClicked: 'first'};
+    this.getResults = this.getResults.bind(this);
+    this.state={lastClicked: 'first', results: null};
   }
   
   clickFirst(e) {
@@ -21,6 +22,10 @@ export default class App extends React.Component {
     e.preventDefault();
     console.log('The tab was clicked.');
     this.setState({lastClicked: 'second'});
+  }
+
+  getResults(results) {
+    this.setState({results: results})
   }
   
   render() {
@@ -41,7 +46,7 @@ export default class App extends React.Component {
 	      <a className={"item "+second} data-tab="second" onClick={this.clickSecond}>Manage</a>
             </div>
             <div className={"ui bottom attached tab segment "+first} data-tab="first">
-              <Picker />
+              <Picker getResults={this.getResults} />
             </div>
             <div className={"ui bottom attached tab segment "+second} data-tab="second">
   	      <Manager />
@@ -49,7 +54,7 @@ export default class App extends React.Component {
 	  </div>
 	  <div className="ui vertical divider"> </div>
 	  <div className="center aligned column">
-	    <Results />
+	    <Results results={this.state.results} />
 	  </div>
         </div> 
       </div>

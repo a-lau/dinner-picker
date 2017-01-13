@@ -29,9 +29,10 @@ export default class Picker extends React.Component {
 	    tempCompare.val = x
           }
 	}
+      return null
       })
       console.log(tempCompare)
-      this.setState({results: tempCompare})
+      this.props.getResults(tempCompare);
     });
   }
 
