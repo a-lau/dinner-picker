@@ -34,8 +34,9 @@ export default class FoodList extends React.Component {
     this.setState({editing: itemKey})
   }
 
-  handleChange(e) {
-    this.setState({selectValue:e.target.value});
+  handleChange(item, e) {
+    item.weight = e.target.value
+    this.setState({selectValue: item.weight});
   }
 
   handleEvent(e) {
@@ -60,7 +61,7 @@ export default class FoodList extends React.Component {
 	<div className="item" key={item.name}>
 	  <div className="ui input">
 	    <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} ref={(input) => {this.textInput=input}}></input>
-	    <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
+	    <select className="ui dropdown" value={item.weight} onChange={this.handleChange.bind(this, item)}>
 	      <option value="10">10</option>
 	      <option value="9">9</option>
 	      <option value="8">8</option>
