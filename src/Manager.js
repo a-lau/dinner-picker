@@ -8,7 +8,7 @@ export default class Manager extends React.Component {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.state = {jsonResults: null, selectValue: 1};
+      this.state = {jsonResults: null, selectValue: 10};
     }
    
     clickAdd(e) { 
@@ -25,27 +25,6 @@ export default class Manager extends React.Component {
 	 this.setState({jsonResults: res})
       })
 	      //.then((res) => { this.state.newData(res) })
-    }
-    startEdit(props) {
-      console.log("Start edit")
-    }
-    saveEdit(props) {
-      console.log('The edit button was clicked.');
-      const editFood = {
-        key: props 
-      };
-      FoodAPIs.editFood(editFood).then((res) => {
-	this.setState({jsonResults: res})
-      })
-    }
-    clickDelete(props) {
-      console.log('The del button was clicked.');
-      const delFood = {
-        key: props 
-      };
-      FoodAPIs.delFood(delFood).then((res) => {
-	this.setState({jsonResults: res})
-      })
     }
 
     componentDidMount() {
