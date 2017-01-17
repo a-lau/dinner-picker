@@ -73,7 +73,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
     else if(rows === undefined) {
       db.run('CREATE TABLE "foodList" ' +  
              '("name" TEXT, ' + 
-	     '"lastUsed" TEXT, ' +
+	     '"lastUsed" INTEGER, ' +
 	     '"weight" INTEGER, ' +
              '"key" TEXT)', function(err) {
       if(err != null) {

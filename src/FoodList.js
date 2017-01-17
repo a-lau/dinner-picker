@@ -45,7 +45,7 @@ export default class FoodList extends React.Component {
     updatedItem.name = this.textInput.value;
     updatedItem.old = this.state.editing;
     updatedItem.weight = this.state.selectValue;
-    updatedItem.date = "10";
+    updatedItem.date = Date.now();
     FoodAPIs.editFood(updatedItem).then((res) => {
       this.setState({jsonResults: res, editing: null})
     })
@@ -59,7 +59,7 @@ export default class FoodList extends React.Component {
       updatedItem.name = target.value;
       updatedItem.old = this.state.editing;
       updatedItem.weight = this.state.selectValue;
-      updatedItem.date = "10";
+      updatedItem.date = Date.now();
       FoodAPIs.editFood(updatedItem).then((res) => {
         this.setState({jsonResults: res, editing: null})
       })

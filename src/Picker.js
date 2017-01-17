@@ -10,23 +10,22 @@ export default class Picker extends React.Component {
   }
   
   pickFood() {
-    console.log("pick me")
     FoodAPIs.getList().then(json => {
       const tempCompare = {
 	key: null,
 	val: null
       }
+      const currTime = Date.now();
       json.map(function(item) {
 	console.log(tempCompare)
-	console.log(item)
+        const modded = (currTime - item.lastUsed) * item.weight / 86400000 // converting ms to days
 	if (!!!tempCompare.val) {
 	  tempCompare.key = item.key
-	  tempCompare.val = parseInt(item.lastUsed, 10) * item.weight
+	  tempCompare.val = modded
 	} else {
-	  const x = parseInt(item.lastUsed, 10) * item.weight
-	  if (x > tempCompare.val) {
+	  if (modded > tempCompare.val) {
 	    tempCompare.key = item.key
-	    tempCompare.val = x
+	    tempCompare.val = modded
           }
 	}
       return null
