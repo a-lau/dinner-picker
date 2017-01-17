@@ -51,6 +51,10 @@ export default class FoodList extends React.Component {
     })
   }
 
+  cancelEdit() {
+    this.setState({editing: null})
+  }
+
   handleEvent(e) {
     if ( e.keyCode === 13 ) {
       let target = e.target,
@@ -88,6 +92,7 @@ export default class FoodList extends React.Component {
 	    </select>
           </div>
 	  <div className="right floated content">
+	    <i className="ban icon" onClick={() => this.cancelEdit()}></i>
 	    <i className="save icon" onClick={() => this.clickSave(item.key)}></i>
 	  </div>
         </div>
