@@ -15,12 +15,10 @@ export default class App extends React.Component {
   
   clickFirst(e) {
     e.preventDefault();
-    console.log('The tab was clicked.');
     this.setState({lastClicked: 'first'});
   } 
   clickSecond(e) {
     e.preventDefault();
-    console.log('The tab was clicked.');
     this.setState({lastClicked: 'second'});
   }
 

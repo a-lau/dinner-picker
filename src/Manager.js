@@ -14,7 +14,6 @@ export default class Manager extends React.Component {
    
     clickAdd(e) { 
       e.preventDefault();
-      console.log('The add button was clicked.');
       const newFood = {
         name: this.refs.meal_input.value,
         key: this.refs.meal_input.value,
@@ -39,7 +38,6 @@ export default class Manager extends React.Component {
     }
 
     updateList(list) {
-	    console.log(list)
       this.setState({jsonResults: list})
     }
 

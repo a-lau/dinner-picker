@@ -29,7 +29,6 @@ const FoodList = {
         body:     JSON.stringify(params),
         headers:  { 'Content-Type': 'application/json'  }})
       .then(response => response.json())
-      //.then(response => { if (response.ok) console.log(response) })
   }
 }
 
