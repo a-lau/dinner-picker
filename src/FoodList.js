@@ -13,9 +13,13 @@ class InputField extends React.Component {
     this.props.updateInput(e.target.value)
   }
 
+  componentDidMount() {
+    this.refs.input.focus();
+  }
+
   render() {
     return (
-      <input onChange={this.handleChange} onKeyDown={this.props.onKeyDown} type="text" defaultValue={this.props.defaultValue}></input>
+      <input onChange={this.handleChange} onKeyDown={this.props.onKeyDown} type="text" defaultValue={this.props.defaultValue} ref="input"></input>
     )
   }
 }
@@ -31,12 +35,6 @@ export default class FoodList extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({jsonResults: nextProps.fl})
-  }
-
-  focus() {
-	  console.log("focus call?")
-		  console.log(this.textInput)
-    this.textInput.focus();
   }
 
   clickDelete(props) {
