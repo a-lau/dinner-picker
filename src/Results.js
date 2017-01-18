@@ -18,9 +18,9 @@ export default class Results extends React.Component {
       <div>
         <h2 className="ui center aligned icon header">
 	  <i className="circular pie chart icon"></i>
-	    Results
+	   Your Dinner: 
         </h2>
-        <div> {this.state.results.key} </div>
+        <h1 className="ui center aligned header"> {this.state.results.key} </h1>
       </div>
     );}
   }

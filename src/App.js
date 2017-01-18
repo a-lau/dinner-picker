@@ -32,12 +32,14 @@ export default class App extends React.Component {
     
     return (
       <div>
-        <h2 className="ui header">
+        <div></div>
+        <h1 className="ui header">
          <div className="content">
            Dinner Picker 
          </div>
-        </h2>
-        <div className="ui two column middle aligned very relaxed stackable grid">
+        </h1>
+	<div></div>
+        <div className="ui two column very relaxed stackable grid">
 	  <div className="column">
 	    <div className="ui top attached tabular menu">
               <a className={"item "+first} data-tab="first" onClick={this.clickFirst}>Pick Meal</a>

@@ -22,7 +22,8 @@ export default class Manager extends React.Component {
       };
       FoodAPIs.addFood(newFood).then((res) => {
 	 // do some toast message that it got added properly
-	 this.setState({jsonResults: res})
+	 this.setState({jsonResults: res, selectValue: 10})
+	 this.refs.meal_input.value = "";
       })
 	      //.then((res) => { this.state.newData(res) })
     }
@@ -47,13 +48,11 @@ export default class Manager extends React.Component {
   	  <div>
 	    <FoodList fl={this.state.jsonResults} updateList={this.updateList} />
 	  </div>
-	  <div className="ui icon simple labeled dropdown button">
-	    <i className="plus icon"></i>
-	    <span className="text">Add New Item</span>
+          <div className="ui divider"></div>
+	  <h4 className="ui header">Add an entry</h4>
 	    <div className="menu">
-	      <div className="header">Input New Item</div>
 	      <div className="ui left input">
-                <input type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal option..."></input>
+                <input type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal choice..."></input>
 		<select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
 		  <option value="10">10</option>
 		  <option value="9">9</option>
@@ -69,8 +68,7 @@ export default class Manager extends React.Component {
 		<button className="ui button" onClick={this.clickAdd}>Add</button>
               </div> 
             </div>
-          </div>
-        </div>
+	</div>
       );
 
     }
