@@ -7,7 +7,6 @@ export default class Results extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     this.setState({results: nextProps.results})
   }
 

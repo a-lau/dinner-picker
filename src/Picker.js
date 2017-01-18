@@ -6,7 +6,6 @@ export default class Picker extends React.Component {
   constructor(props) {
     super(props);
     this.pickFood = this.pickFood.bind(this);
-    this.state = {results: null};
   }
   
   pickFood() {
@@ -17,7 +16,6 @@ export default class Picker extends React.Component {
       }
       const currTime = Date.now();
       json.map(function(item) {
-	console.log(tempCompare)
         const modded = (currTime - item.lastUsed) * item.weight / 86400000 // converting ms to days
 	if (!!!tempCompare.val) {
 	  tempCompare.key = item.key
@@ -30,7 +28,6 @@ export default class Picker extends React.Component {
 	}
       return null
       })
-      console.log(tempCompare)
       this.props.getResults(tempCompare);
     });
   }
