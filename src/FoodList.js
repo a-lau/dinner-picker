@@ -2,13 +2,31 @@ import React from 'react'
 
 import FoodAPIs from './FoodAPIs'
 
+class InputField extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.props.updateInput(e.target.value)
+  }
+
+  render() {
+    return (
+      <input onChange={this.handleChange} onKeyDown={this.props.onKeyDown} type="text" defaultValue={this.props.defaultValue}></input>
+    )
+  }
+}
+
 export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: props.fl, editing: null, selectValue: 1}
-    this.focus = this.focus.bind(this);
+    this.state = {jsonResults: props.fl, editing: null, selectValue: 1, inputVal: null}
     this.handleChange = this.handleChange.bind(this);
+    this.updateInput = this.updateInput.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +49,6 @@ export default class FoodList extends React.Component {
   }
 
   toggleEdit(itemKey) {
-    //this.setState({editing: itemKey}, this.focus())
     this.setState({editing: itemKey})
   }
 
@@ -40,10 +57,14 @@ export default class FoodList extends React.Component {
     this.setState({selectValue: item.weight});
   }
 
+  updateInput(item) {
+    this.setState({inputVal: item});
+  }
+
   clickSave() {
     const updatedItem = {};
-    updatedItem.key = this.textInput.value;
-    updatedItem.name = this.textInput.value;
+    updatedItem.key = this.state.inputVal;
+    updatedItem.name = this.state.inputVal;
     updatedItem.old = this.state.editing;
     updatedItem.weight = this.state.selectValue;
     updatedItem.date = Date.now();
@@ -67,10 +88,11 @@ export default class FoodList extends React.Component {
 
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
+	    console.log(item.key)
       return(
 	<div className="item" key={item.name}>
 	  <div className="ui input">
-	    <input onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} ref={(input) => {this.textInput=input}}></input>
+	    <InputField onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} updateInput={this.updateInput} />
 	    <select className="ui dropdown" value={item.weight} onChange={this.handleChange.bind(this, item)}>
 	      <option value="10">10</option>
 	      <option value="9">9</option>
