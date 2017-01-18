@@ -40,6 +40,8 @@ export default class Manager extends React.Component {
     handleEvent(e) {
       if( e.keyCode === 13 ) {
 	this.clickAdd(e);
+      } else if( e.keyCode === 27 ) {
+	this.refs.meal_input.value = "";
       }
     }
 
