@@ -48,6 +48,20 @@ app.post('/api/v1/edit_food', function (req, res) {
   });
 })
 
+app.post('/api/v1/update_picked', function (req, res) {
+  const sqlRequest = "UPDATE foodList SET lastUsed='" + req.body.time + "' " +
+                     "WHERE key='" + req.body.key + "'"
+  db.run(sqlRequest, function(err) {
+    if(err !== null) {
+      next(err);
+    } else {
+      db.all('SELECT * FROM foodlist', function(err, row) {
+        res.send(JSON.stringify(row));
+      });
+    }
+  });
+})
+
 app.delete('/api/v1/del_food', function (req, res) {
   db.run("DELETE FROM foodList WHERE key='" + req.body.key + "'",
          function(err) {

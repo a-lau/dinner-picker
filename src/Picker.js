@@ -12,11 +12,11 @@ export default class Picker extends React.Component {
     FoodAPIs.getList().then(json => {
       const tempCompare = {
 	key: null,
-	val: null
+	val: null,
+        time: Date.now()
       }
-      const currTime = Date.now();
       json.map(function(item) {
-        const modded = (currTime - item.lastUsed) * item.weight / 86400000 // converting ms to days
+        const modded = (tempCompare.time - item.lastUsed) * item.weight / 86400000 // converting ms to days
 	if (!!!tempCompare.val) {
 	  tempCompare.key = item.key
 	  tempCompare.val = modded
@@ -29,7 +29,12 @@ export default class Picker extends React.Component {
       return null
       })
       this.props.getResults(tempCompare);
+      this.updatePicked(tempCompare);
     });
+  }
+
+  updatePicked(item) {
+    FoodAPIs.updatePicked(item)
   }
 
   render() {
