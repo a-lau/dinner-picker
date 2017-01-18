@@ -14,6 +14,7 @@ export default class FoodList extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({jsonResults: nextProps.fl})
   }
+
   focus() {
 	  console.log("focus call?")
 		  console.log(this.textInput)
@@ -59,7 +60,7 @@ export default class FoodList extends React.Component {
   handleEvent(e) {
     if ( e.keyCode === 13 ) {
       let target = e.target,
-	updatedItem = {};
+      updatedItem = {};
       updatedItem.key = target.value;
       updatedItem.name = target.value;
       updatedItem.old = this.state.editing;

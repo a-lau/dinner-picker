@@ -25,7 +25,6 @@ export default class Manager extends React.Component {
 	 this.setState({jsonResults: res, selectValue: 10})
 	 this.refs.meal_input.value = "";
       })
-	      //.then((res) => { this.state.newData(res) })
     }
 
     componentDidMount() {
