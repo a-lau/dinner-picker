@@ -37,6 +37,13 @@ export default class Manager extends React.Component {
       this.setState({selectValue:e.target.value});
     }
 
+    handleEvent(e) {
+      if( e.keyCode === 13 ) {
+	this.clickAdd(e);
+      }
+    }
+
+
     updateList(list) {
       this.setState({jsonResults: list})
     }
@@ -51,7 +58,7 @@ export default class Manager extends React.Component {
 	  <h4 className="ui header">Add an entry</h4>
 	    <div className="menu">
 	      <div className="ui left input">
-                <input type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal choice..."></input>
+                <input onKeyDown={this.handleEvent.bind(this)} type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal choice..."></input>
 		<select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
 		  <option value="10">10</option>
 		  <option value="9">9</option>

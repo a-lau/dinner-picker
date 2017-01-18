@@ -40,7 +40,7 @@ export default class FoodList extends React.Component {
     this.setState({selectValue: item.weight});
   }
 
-  clickSave(itemKey) {
+  clickSave() {
     const updatedItem = {};
     updatedItem.key = this.textInput.value;
     updatedItem.name = this.textInput.value;
@@ -59,17 +59,7 @@ export default class FoodList extends React.Component {
 
   handleEvent(e) {
     if ( e.keyCode === 13 ) {
-      let target = e.target,
-      updatedItem = {};
-      updatedItem.key = target.value;
-      updatedItem.name = target.value;
-      updatedItem.old = this.state.editing;
-      updatedItem.weight = this.state.selectValue;
-      updatedItem.date = Date.now();
-      FoodAPIs.editFood(updatedItem).then((res) => {
-        this.setState({editing: null})
-        this.props.updateList(res)
-      })
+      this.clickSave();
     } else if ( e.keyCode === 27 ) {
       this.setState({editing: null})
     }
@@ -96,7 +86,7 @@ export default class FoodList extends React.Component {
           </div>
 	  <div className="right floated content">
 	    <i className="ban icon" onClick={() => this.cancelEdit()}></i>
-	    <i className="save icon" onClick={() => this.clickSave(item.key)}></i>
+	    <i className="save icon" onClick={() => this.clickSave()}></i>
 	  </div>
         </div>
       )
