@@ -40,7 +40,7 @@ export default class Picker extends React.Component {
   render() {
     return(
       <div>
-        <button className="ui button" onClick={this.pickFood} >Pick my meal</button>
+        <button className="ui button" onClick={this.pickFood}>Tell me what to eat</button>
       </div>
     );
   }
