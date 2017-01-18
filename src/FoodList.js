@@ -15,6 +15,7 @@ class InputField extends React.Component {
 
   componentDidMount() {
     this.refs.input.focus();
+    this.props.updateInput(this.props.defaultValue)
   }
 
   render() {
@@ -28,7 +29,7 @@ export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: props.fl, editing: null, selectValue: 1, inputVal: null}
+    this.state = {jsonResults: props.fl, editing: null, selectValue: 10, inputVal: null}
     this.handleChange = this.handleChange.bind(this);
     this.updateInput = this.updateInput.bind(this);
   }
