@@ -47,7 +47,8 @@ export default class FoodList extends React.Component {
     updatedItem.weight = this.state.selectValue;
     updatedItem.date = Date.now();
     FoodAPIs.editFood(updatedItem).then((res) => {
-      this.setState({jsonResults: res, editing: null})
+      this.setState({editing: null})
+      this.props.updateList(res)
     })
   }
 
@@ -65,7 +66,8 @@ export default class FoodList extends React.Component {
       updatedItem.weight = this.state.selectValue;
       updatedItem.date = Date.now();
       FoodAPIs.editFood(updatedItem).then((res) => {
-        this.setState({jsonResults: res, editing: null})
+        this.setState({editing: null})
+        this.props.updateList(res)
       })
     } else if ( e.keyCode === 27 ) {
       this.setState({editing: null})

@@ -8,6 +8,7 @@ export default class Manager extends React.Component {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.updateList = this.updateList.bind(this);
       this.state = {jsonResults: null, selectValue: 10};
     }
    
@@ -37,11 +38,16 @@ export default class Manager extends React.Component {
       this.setState({selectValue:e.target.value});
     }
 
+    updateList(list) {
+	    console.log(list)
+      this.setState({jsonResults: list})
+    }
+
     render() {
       return(
 	<div>
   	  <div>
-	    <FoodList fl={this.state.jsonResults}/>
+	    <FoodList fl={this.state.jsonResults} updateList={this.updateList} />
 	  </div>
 	  <div className="ui icon simple labeled dropdown button">
 	    <i className="plus icon"></i>
