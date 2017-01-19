@@ -47,8 +47,8 @@ export default class FoodList extends React.Component {
     })
   }
 
-  toggleEdit(itemKey) {
-    this.setState({editing: itemKey})
+  toggleEdit(item) {
+    this.setState({editing: item.key, selectValue: item.weight})
   }
 
   handleChange(item, e) {
@@ -96,7 +96,7 @@ export default class FoodList extends React.Component {
 	<div className="item" key={item.name}>
 	  <div className="ui input">
 	    <InputField onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} updateInput={this.updateInput} />
-	    <select className="ui dropdown" value={item.weight} onChange={this.handleChange.bind(this, item)}>
+	    <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange.bind(this, item)}>
 	      <option value="10">10</option>
 	      <option value="9">9</option>
 	      <option value="8">8</option>
@@ -119,7 +119,7 @@ export default class FoodList extends React.Component {
       return(
         <div className="item" key={item.name}>
           <div className="right floated content">
-            <i className="edit icon" onClick={() => this.toggleEdit(item.key)}></i>
+            <i className="edit icon" onClick={() => this.toggleEdit(item)}></i>
             <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
           </div>
           <div className="content">
