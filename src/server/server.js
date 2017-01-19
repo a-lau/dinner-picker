@@ -18,18 +18,23 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
-  const sqlRequest = "INSERT INTO 'foodList' (name, lastUsed, weight, key) " + 
-	             "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "')"
-  db.run(sqlRequest, function(err) {
-    if(err !== null) {
-      next(err);
-   } else {
-     //res.send(JSON.stringify({key: req.body.key}));
-     db.all('SELECT * FROM foodlist', function(err, row) {
-       res.send(JSON.stringify(row));
-     });
-   }
- }); 
+  checkExists(req.body.key).then(exists => {
+  if(!exists) {
+    const sqlRequest = "INSERT INTO 'foodList' (name, lastUsed, weight, key) " + 
+	               "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "')"
+    db.run(sqlRequest, function(err) {
+      if(err !== null) {
+        next(err);
+     } else {
+       db.all('SELECT * FROM foodlist', function(err, row) {
+         res.send(JSON.stringify(row));
+       });
+     }
+   }); 
+  } else {
+    res.status(400).send("Duplicate entry")
+  }
+  });
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
@@ -40,7 +45,6 @@ app.post('/api/v1/edit_food', function (req, res) {
     if(err !== null) {
       next(err);
     } else {
-      //res.send(JSON.stringify({key: req.body.key}));
       db.all('SELECT * FROM foodlist', function(err, row) {
         res.send(JSON.stringify(row));
       });
@@ -68,13 +72,23 @@ app.delete('/api/v1/del_food', function (req, res) {
     if(err !== null) {
       next(err);
     } else {
-      //res.send(JSON.stringify({key: req.body.key}));
       db.all('SELECT * FROM foodlist', function(err, row) {
         res.send(JSON.stringify(row));
       });
     }
   });
 }) 
+
+function checkExists(key) {
+  return new Promise(function(resolve, reject) {
+    const sqlCheck = "SELECT * FROM foodlist WHERE key='" + key + "'";
+    db.all(sqlCheck, function(err, row) {
+      resolve(row.length === 0 ? false : true );
+    })
+  })
+}
+
+  
 
 
 // DB Creation

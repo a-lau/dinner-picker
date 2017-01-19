@@ -8,7 +8,15 @@ const FoodList = {
       { method:   'post',
          body:    JSON.stringify(params),
          headers: { 'Content-Type': 'application/json' } })
-      .then(response => response.json())
+      .then(response => { 
+        if (response.ok) {
+	  return response.json()
+        } else {
+		console.log(response)
+	  console.log("bad response")
+	}
+      }
+	      )
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',
@@ -19,6 +27,7 @@ const FoodList = {
         if (response.ok) {
 	  return response.json()
         } else {
+		console.log(response.json())
 	  console.log("bad response")
 	}
       })
