@@ -2,6 +2,7 @@ import React from 'react'
 
 import FoodAPIs from './FoodAPIs'
 import FoodList from './FoodList'
+import ErrorDisplay from './ErrorDisplay'
 
 export default class Manager extends React.Component {
     constructor(props) {
@@ -9,7 +10,8 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.updateList = this.updateList.bind(this);
-      this.state = {jsonResults: null, selectValue: 10};
+      this.dismissDialog = this.dismissDialog.bind(this);
+      this.state = {jsonResults: null, selectValue: 10, error: false};
     }
    
     clickAdd(e) { 
@@ -21,10 +23,11 @@ export default class Manager extends React.Component {
         weight: this.state.selectValue
       };
       FoodAPIs.addFood(newFood).then((res) => {
-	 if( !!res ) {
+	      console.log(res)
+	 if( !res.error ) {
 	   this.setState({jsonResults: res, selectValue: 10})
 	 } else {
-           console.log("didn't add")
+	   this.setState({error: true})
 	 }
 	 this.refs.meal_input.value = "";
       })
@@ -48,14 +51,19 @@ export default class Manager extends React.Component {
       }
     }
 
-
     updateList(list) {
       this.setState({jsonResults: list})
+    }
+
+    dismissDialog(displayError) {
+      console.log("in mgr " + displayError)
+      this.setState({error: displayError})
     }
 
     render() {
       return(
 	<div>
+	  <ErrorDisplay displayError={this.state.error} dismissDialog={this.dismissDialog} />
   	  <div>
 	    <FoodList fl={this.state.jsonResults} updateList={this.updateList} />
 	  </div>

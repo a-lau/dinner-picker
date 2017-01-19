@@ -12,6 +12,7 @@ const FoodList = {
         if (response.ok) {
 	  return response.json()
         } else {
+	  console.log("bad response")
 	  return null
 	}
       }
