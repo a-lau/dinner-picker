@@ -32,7 +32,7 @@ app.post('/api/v1/add_food', function (req, res) {
      }
    }); 
   } else {
-    res.status(400).send("Duplicate entry")
+    res.status(304).send("Duplicate entry")
   }
   });
 })

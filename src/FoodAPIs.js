@@ -12,8 +12,7 @@ const FoodList = {
         if (response.ok) {
 	  return response.json()
         } else {
-		console.log(response)
-	  console.log("bad response")
+	  return null
 	}
       }
 	      )
@@ -27,7 +26,6 @@ const FoodList = {
         if (response.ok) {
 	  return response.json()
         } else {
-		console.log(response.json())
 	  console.log("bad response")
 	}
       })

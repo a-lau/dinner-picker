@@ -21,8 +21,11 @@ export default class Manager extends React.Component {
         weight: this.state.selectValue
       };
       FoodAPIs.addFood(newFood).then((res) => {
-	 // do some toast message that it got added properly
-	 this.setState({jsonResults: res, selectValue: 10})
+	 if( !!res ) {
+	   this.setState({jsonResults: res, selectValue: 10})
+	 } else {
+           console.log("didn't add")
+	 }
 	 this.refs.meal_input.value = "";
       })
     }
