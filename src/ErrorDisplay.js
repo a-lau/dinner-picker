@@ -12,7 +12,7 @@ export default class ErrorDisplay extends React.Component {
   }
 
   dismissDialog() {
-    this.props.dismissDialog(false);
+    this.props.toggleErrorDialog(false);
   }
 
   render() {

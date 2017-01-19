@@ -38,17 +38,23 @@ app.post('/api/v1/add_food', function (req, res) {
 })
 
 app.post('/api/v1/edit_food', function (req, res) {
-  const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
-	             "lastUsed='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
-                     "WHERE name='" + req.body.old + "'"
-  db.run(sqlRequest, function(err) {
-    if(err !== null) {
-      next(err);
-    } else {
-      db.all('SELECT * FROM foodlist', function(err, row) {
-        res.send(JSON.stringify(row));
-      });
-    }
+  checkExists(req.body.old).then(exists => {
+  if(!exists) {
+    const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
+  	               "lastUsed='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
+                       "WHERE name='" + req.body.old + "'"
+    db.run(sqlRequest, function(err) {
+      if(err !== null) {
+        next(err);
+      } else {
+        db.all('SELECT * FROM foodlist', function(err, row) {
+          res.send(JSON.stringify(row));
+        });
+      }
+    });
+  } else {
+    res.send({error: "Duplicate entry" })
+  }
   });
 })
 

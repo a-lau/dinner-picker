@@ -10,7 +10,7 @@ export default class Manager extends React.Component {
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.updateList = this.updateList.bind(this);
-      this.dismissDialog = this.dismissDialog.bind(this);
+      this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
       this.state = {jsonResults: null, selectValue: 10, error: false};
     }
    
@@ -55,7 +55,7 @@ export default class Manager extends React.Component {
       this.setState({jsonResults: list})
     }
 
-    dismissDialog(displayError) {
+    toggleErrorDialog(displayError) {
       console.log("in mgr " + displayError)
       this.setState({error: displayError})
     }
@@ -63,9 +63,9 @@ export default class Manager extends React.Component {
     render() {
       return(
 	<div>
-	  <ErrorDisplay displayError={this.state.error} dismissDialog={this.dismissDialog} />
+	  <ErrorDisplay displayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
   	  <div>
-	    <FoodList fl={this.state.jsonResults} updateList={this.updateList} />
+	    <FoodList fl={this.state.jsonResults} dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} updateList={this.updateList} />
 	  </div>
           <div className="ui divider"></div>
 	  <h4 className="ui header">Add an entry</h4>

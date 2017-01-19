@@ -15,8 +15,7 @@ const FoodList = {
 	  console.log("bad response")
 	  return null
 	}
-      }
-	      )
+      })
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',
@@ -28,6 +27,7 @@ const FoodList = {
 	  return response.json()
         } else {
 	  console.log("bad response")
+	  return null
 	}
       })
   },

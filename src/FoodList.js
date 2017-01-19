@@ -29,13 +29,13 @@ export default class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: props.fl, editing: null, selectValue: 10, inputVal: null}
+    this.state = {jsonResults: props.fl, editing: null, selectValue: 10, inputVal: null, error: props.displayError}
     this.handleChange = this.handleChange.bind(this);
     this.updateInput = this.updateInput.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({jsonResults: nextProps.fl})
+    this.setState({jsonResults: nextProps.fl, error: nextProps.displayError})
   }
 
   clickDelete(props) {
@@ -68,8 +68,12 @@ export default class FoodList extends React.Component {
     updatedItem.weight = this.state.selectValue;
     updatedItem.date = Date.now();
     FoodAPIs.editFood(updatedItem).then((res) => {
-      this.setState({editing: null})
-      this.props.updateList(res)
+      if( !res.error ) {
+        this.setState({editing: null})
+        this.props.updateList(res)
+      } else {
+	this.props.toggleErrorDialog(true)
+      }
     })
   }
 
@@ -87,7 +91,6 @@ export default class FoodList extends React.Component {
 
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
-	    console.log(item.key)
       return(
 	<div className="item" key={item.name}>
 	  <div className="ui input">
