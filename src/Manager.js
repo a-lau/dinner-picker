@@ -16,6 +16,7 @@ export default class Manager extends React.Component {
    
     clickAdd(e) { 
       e.preventDefault();
+      this.setState({error: false})
       const newFood = {
         name: this.refs.meal_input.value,
         key: this.refs.meal_input.value,
@@ -23,13 +24,12 @@ export default class Manager extends React.Component {
         weight: this.state.selectValue
       };
       FoodAPIs.addFood(newFood).then((res) => {
-	      console.log(res)
 	 if( !res.error ) {
 	   this.setState({jsonResults: res, selectValue: 10})
+	   this.refs.meal_input.value = "";
 	 } else {
 	   this.setState({error: true})
 	 }
-	 this.refs.meal_input.value = "";
       })
     }
 
@@ -56,7 +56,6 @@ export default class Manager extends React.Component {
     }
 
     toggleErrorDialog(displayError) {
-      console.log("in mgr " + displayError)
       this.setState({error: displayError})
     }
 

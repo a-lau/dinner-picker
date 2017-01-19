@@ -57,6 +57,7 @@ export default class FoodList extends React.Component {
   }
 
   updateInput(item) {
+    this.props.toggleErrorDialog(false)
     this.setState({inputVal: item});
   }
 

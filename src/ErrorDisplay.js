@@ -17,8 +17,14 @@ export default class ErrorDisplay extends React.Component {
 
   render() {
     if(this.state.error) {
-      return <button onClick={this.dismissDialog} > hi </button>
-    } else {
+      return (
+        <div className="ui warning message">
+	  <i className="close icon" onClick={this.dismissDialog}></i>
+	  <div className="header">
+	    Action failed! Duplicate entry exists.
+	   </div>
+	</div>
+    )} else {
       return null
     }
   }
