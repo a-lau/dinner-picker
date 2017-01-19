@@ -43,7 +43,7 @@ export default class FoodList extends React.Component {
       key: props 
     };
     FoodAPIs.delFood(delFood).then((res) => {
-      this.setState({jsonResults: res})
+      this.props.updateList(res)
     })
   }
 
