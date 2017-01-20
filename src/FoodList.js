@@ -93,7 +93,7 @@ export default class FoodList extends React.Component {
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
       return(
-	<div className="item" key={item.name}>
+	<div className="item middle aligned" key={item.name}>
 	  <div className="ui input">
 	    <InputField onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} updateInput={this.updateInput} />
 	    <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange.bind(this, item)}>
@@ -117,10 +117,9 @@ export default class FoodList extends React.Component {
       )
     } else {
       return(
-        <div className="item" key={item.name}>
+        <div className="item" key={item.name} onClick={() => this.toggleEdit(item)}>
           <div className="right floated content">
-            <i className="edit icon" onClick={() => this.toggleEdit(item)}></i>
-            <i className="trash icon" onClick={() => this.clickDelete(item.key)}></i>
+            <i className="remove icon" onClick={() => this.clickDelete(item.key)}></i>
           </div>
           <div className="content">
             <div className="header">{item.name}</div>
