@@ -39,7 +39,6 @@ app.post('/api/v1/add_food', function (req, res) {
 
 app.post('/api/v1/edit_food', function (req, res) {
   checkExists(req.body.key).then(exists => {
-	  console.log(exists)
   if(!exists || req.body.old == req.body.key) {
     const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
   	               "lastUsed='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
