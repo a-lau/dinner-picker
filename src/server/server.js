@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// API Calls
+// API Calls for foodList
 app.get('/api/v1/list_food', function (req, res) {
   db.all('SELECT * FROM foodlist', function(err, row) {
     res.send(JSON.stringify(row));
@@ -85,6 +85,29 @@ app.delete('/api/v1/del_food', function (req, res) {
   });
 }) 
 
+// API calls for eatenList
+app.post('/api/v1/add_eaten', function (req, res) {
+  const sqlRequest = "INSERT INTO 'eatenList' (name, dateUsed, key) " +
+                     "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.key + "')"
+  db.run(sqlRequest, function(err) {
+    if(err !== null) {
+      next(err);
+    } else {
+      db.all('SELECT * FROM eatenList', function(err, row) {
+        res.send(JSON.stringify(row));
+      });
+    }
+  });
+})
+
+app.get('/api/v1/list_eaten', function (req, res) {
+  db.all('SELECT * FROM eatenList', function(err, row) {
+    res.send(JSON.stringify(row));
+  });
+})
+
+
+// Helper functions
 function checkExists(key) {
   return new Promise(function(resolve, reject) {
     const sqlCheck = "SELECT * FROM foodlist WHERE key='" + key + "'";
@@ -94,11 +117,9 @@ function checkExists(key) {
   })
 }
 
-  
-
+// TODO Make a helper function that takes the params and then runs a check instead of repeating code for both tables
 
 // DB Creation
-
 db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
   function(err, rows) {
     if(err !== null) {
@@ -121,6 +142,26 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
     else {
       console.log("SQL Table foodList already initialized.");
     }
+});
+
+db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='eatenList'",
+  function(err, rows) {
+    if(err !== null) {
+      console.log(err);
+    } else if(rows === undefined) {
+      db.run('CREATE TABLE "eatenList" ' +
+             '("name" TEXT, ' +
+             '"dateUsed" INTEGER, ' +
+	     '"key" INTEGER)', function(err) {
+    if(err != null) {
+      console.log(err);
+    } else {
+      console.log("SQL Table eatenList initialized.");
+    }
+  });
+  } else {
+    console.log("SQL Table eatenList already initialized.");
+  }
 });
 
 var server = app.listen(3001, function () {

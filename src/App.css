@@ -7,3 +7,10 @@
 .ban {
   padding: 7px;
 }
+
+.button_format {
+  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
