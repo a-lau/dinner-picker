@@ -32,31 +32,22 @@ export default class App extends React.Component {
     
     return (
       <div>
-        <div></div>
         <h1 className="ui header">
          <div className="content">
            Dinner Picker 
          </div>
         </h1>
-	<div></div>
-        <div className="ui two column very relaxed stackable grid">
-	  <div className="column">
 	    <div className="ui top attached tabular menu">
               <a className={"item "+first} data-tab="first" onClick={this.clickFirst}>Pick a meal</a>
 	      <a className={"item "+second} data-tab="second" onClick={this.clickSecond}>Manage meals</a>
             </div>
             <div className={"ui bottom attached tab segment "+first} data-tab="first">
               <Picker getResults={this.getResults} />
+	      <Results results={this.state.results} />
             </div>
             <div className={"ui bottom attached tab segment "+second} data-tab="second">
   	      <Manager />
             </div>
-	  </div>
-	  <div className="ui vertical divider"> </div>
-	  <div className="center aligned column">
-	    <Results results={this.state.results} />
-	  </div>
-        </div> 
       </div>
     );
   }
