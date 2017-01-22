@@ -12,7 +12,24 @@ export default class EatenList extends React.Component {
       this.setState({jsonEaten: json})
     });
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({jsonEaten: nextProps});
+  }
+
+  getEatenList(list) {
+    this.setState({jsonEaten: list});
+  }
+
   render() {
-    return <div> Woo </div>
+    if(!!!this.state.jsonEaten) {
+      return <div> Loading... </div>
+    } else {
+    return (<div className="ui middle aligned selection list">
+      {this.state.jsonEaten.map(function(item) {
+        return <div>{item.namei}</div>
+      }, this)}
+    </div> )
+    }
   }
 }

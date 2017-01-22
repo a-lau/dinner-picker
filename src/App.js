@@ -12,7 +12,8 @@ export default class App extends React.Component {
     this.clickSecond=this.clickSecond.bind(this);
     this.clickThird=this.clickThird.bind(this);
     this.getResults = this.getResults.bind(this);
-    this.state={lastClicked: 'first', results: null};
+    this.getPicked = this.getPicked.bind(this);
+    this.state={lastClicked: 'first', results: null, eatenList: null};
   }
   
   clickFirst(e) {
@@ -30,6 +31,10 @@ export default class App extends React.Component {
 
   getResults(results) {
     this.setState({results: results})
+  }
+
+  getPicked(eatenList) {
+    this.setState({eatenList: eatenList})
   }
   
   render() {
@@ -51,13 +56,13 @@ export default class App extends React.Component {
         </div>
         <div className={"ui bottom attached tab segment "+first} data-tab="first">
           <Picker getResults={this.getResults} />
-	  <Results results={this.state.results} />
+	  <Results results={this.state.results} getPicked={this.getPicked} />
         </div>
         <div className={"ui bottom attached tab segment "+second} data-tab="second">
   	  <Manager />
         </div>
         <div className={"ui bottom attached tab segment "+third} data-tab="third">
-	  <EatenList />
+	  <EatenList el={this.state.eatenList} />
 	</div>
       </div>
     );

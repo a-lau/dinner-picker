@@ -33,10 +33,6 @@ export default class Picker extends React.Component {
     });
   }
 
-  updatePicked(item) {
-    FoodAPIs.updatePicked(item)
-  }
-
   render() {
     return(
       <div>

@@ -19,7 +19,7 @@ export default class Results extends React.Component {
       key: this.state.results.key
     }
     FoodAPIs.addEaten(food).then((res) => {
-      //update props
+      this.props.getPicked(res)
     })
   }
 
