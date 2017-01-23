@@ -34,11 +34,9 @@ export default class Results extends React.Component {
         </h2>
         <h1 className="ui center aligned header"> {this.state.results.key} </h1>
 	<div className="button_format">
-	  <button className="ui green basic icon button" onClick={this.clickAdd} >
+	  <button className="ui green right labeled icon button" onClick={this.clickAdd} >
             <i className="checkmark icon"></i>
-	  </button>
-	  <button className="ui red basic icon button">
-	    <i className="refresh icon"></i>
+	    Sounds good
 	  </button>
 	</div>
       </div>
