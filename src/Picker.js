@@ -16,7 +16,7 @@ export default class Picker extends React.Component {
         time: Date.now()
       }
       json.map(function(item) {
-        const modded = (tempCompare.time - item.lastUsed) * item.weight / 86400000 // converting ms to days
+        const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
 	if (!!!tempCompare.val) {
 	  tempCompare.key = item.key
 	  tempCompare.val = modded
