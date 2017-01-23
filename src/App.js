@@ -3,6 +3,7 @@ import './App.css';
 import Picker from './Picker';
 import Manager from './Manager';
 import Results from './Results';
+import FoodAPIs from './FoodAPIs';
 import EatenList from './EatenList';
 
 export default class App extends React.Component {
@@ -14,6 +15,12 @@ export default class App extends React.Component {
     this.getResults = this.getResults.bind(this);
     this.getPicked = this.getPicked.bind(this);
     this.state={lastClicked: 'first', results: null, eatenList: null};
+  }
+
+  componentDidMount() {
+    FoodAPIs.getEaten().then(json => {
+      this.setState({eatenList: json})
+    });
   }
   
   clickFirst(e) {

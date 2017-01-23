@@ -87,8 +87,8 @@ app.delete('/api/v1/del_food', function (req, res) {
 
 // API calls for eatenList
 app.post('/api/v1/add_eaten', function (req, res) {
-  const sqlRequest = "INSERT INTO 'eatenList' (name, dateUsed, key) " +
-                     "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.key + "')"
+  const sqlRequest = "INSERT INTO 'eatenList' (name, dateUsed) " +
+                     "VALUES('" + req.body.name + "', '" + req.body.date + "')"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
       next(err);
@@ -152,7 +152,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='eatenList'",
       db.run('CREATE TABLE "eatenList" ' +
              '("name" TEXT, ' +
              '"dateUsed" INTEGER, ' +
-	     '"key" INTEGER)', function(err) {
+	     '"key" INTEGER PRIMARY KEY)', function(err) {
     if(err != null) {
       console.log(err);
     } else {

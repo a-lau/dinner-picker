@@ -16,7 +16,6 @@ export default class Results extends React.Component {
     const food = {
       name: this.state.results.key,
       date: Date.now(),
-      key: this.state.results.key
     }
     FoodAPIs.addEaten(food).then((res) => {
       this.props.getPicked(res)

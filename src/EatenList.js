@@ -1,5 +1,4 @@
 import React from 'react';
-import FoodAPIs from './FoodAPIs';
 
 export default class EatenList extends React.Component {
   constructor(props) {
@@ -7,14 +6,8 @@ export default class EatenList extends React.Component {
     this.state = {jsonEaten: null}
   }
 
-  componentDidMount() {
-    FoodAPIs.getEaten().then(json => {
-      this.setState({jsonEaten: json})
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
-    this.setState({jsonEaten: nextProps});
+    this.setState({jsonEaten: nextProps.el});
   }
 
   getEatenList(list) {
@@ -27,7 +20,7 @@ export default class EatenList extends React.Component {
     } else {
     return (<div className="ui middle aligned selection list">
       {this.state.jsonEaten.map(function(item) {
-        return <div>{item.namei}</div>
+        return <div key={item.key}>{item.name}</div>
       }, this)}
     </div> )
     }
