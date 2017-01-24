@@ -7,11 +7,7 @@ export default class EatenList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var newList = nextProps.el 
-    console.log(nextProps.el)
-    //newList.reverse()
-    //console.log(newList)*/
-    this.setState({jsonEaten: newList});
+    this.setState({jsonEaten: nextProps.el});
   }
 
   /*getEatenList(list) {

@@ -19,7 +19,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     FoodAPIs.getEaten().then(json => {
-      this.setState({eatenList: json})
+      var newList = json
+      newList.reverse()
+      this.setState({eatenList: newList})
     });
   }
   
