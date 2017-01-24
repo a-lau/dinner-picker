@@ -7,14 +7,23 @@ export default class EatenList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({jsonEaten: nextProps.el});
+    var newList = nextProps.el 
+    console.log(nextProps.el)
+    //newList.reverse()
+    //console.log(newList)*/
+    this.setState({jsonEaten: newList});
   }
 
-  getEatenList(list) {
-    this.setState({jsonEaten: list});
-  }
+  /*getEatenList(list) {
+    var newList = list
+    newList.reverse()
+    this.setState({jsonEaten: newList});
+    console.log("get list")
+	    console.log(newList)
+  }*/
 
   render() {
+	  console.log(this.state.jsonEaten)
     if(!!!this.state.jsonEaten) {
       return <div> Loading... </div>
     } else {
@@ -26,10 +35,11 @@ export default class EatenList extends React.Component {
 	</tr></thead>
         <tbody>
         {this.state.jsonEaten.map(function(item) {
+	  var newDate = new Date(item.dateUsed).toString().substring(0,16)
           return (
 	    <tr key={item.key}>
 	      <td>{item.name}</td>
-	      <td>{item.dateUsed}</td>
+	      <td>{newDate}</td>
 	    </tr>
 	 )}, this)}
 	</tbody>

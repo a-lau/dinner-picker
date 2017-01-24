@@ -13,17 +13,28 @@ export default class Picker extends React.Component {
       const tempCompare = {
 	key: null,
 	val: null,
-        time: Date.now()
+        time: Date.now(),
+    	date: null
       }
       json.map(function(item) {
         const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
 	if (!!!tempCompare.val) {
 	  tempCompare.key = item.key
 	  tempCompare.val = modded
+	  if(item.lastUsed) {
+            tempCompare.date = item.lastUsed
+	  } else {
+	    tempCompare.date = "Not yet eaten"
+          }
 	} else {
 	  if (modded > tempCompare.val) {
 	    tempCompare.key = item.key
 	    tempCompare.val = modded
+	    if(item.lastUsed) {
+	      tempCompare.date = item.lastUsed
+	    } else {
+	      tempCompare.date = "Not yet eaten"
+	    }
           }
 	}
       return null
