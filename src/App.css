@@ -8,9 +8,13 @@
   padding: 7px;
 }
 
-.button_format {
+.div_button {
   width: 14%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.specialButton {
+  width: 125px;
 }
 

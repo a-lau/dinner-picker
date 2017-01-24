@@ -4,12 +4,12 @@ import classnames from 'classnames'
 export default class SelectButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {active: false};
+    this.state = {green: false, buttonText: "Sounds good"};
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
-    this.setState({active: true})
+    this.setState({green: true, buttonText: "I'm in"})
     const food = {
        name: this.props.selected,
        date: Date.now(),
@@ -18,7 +18,8 @@ export default class SelectButton extends React.Component {
   }
 
   render() {
-    let classes = classnames('ui button', {active: this.state.active})
-    return <button className={classes} onClick={this.onClick} > Sounds good </button>
+	  console.log(this.state.buttonText)
+    let classes = classnames('ui button specialButton', {green: this.state.green})
+    return <button className={classes} onClick={this.onClick} >{this.state.buttonText}</button>
   }
 }

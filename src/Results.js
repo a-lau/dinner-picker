@@ -43,11 +43,8 @@ export default class Results extends React.Component {
         </h2>
         <h1 className="ui center aligned header"> {this.state.results.key} </h1>
 	<h5 className="ui center aligned header"> Last had: {newDate} </h5>
-	<div className="button_format">
+	<div className="div_button">
 	  <SelectButton selected={this.state.results.key} getFood={this.getFood} />
-            <i className="checkmark icon"></i>
-	    Sounds good
-	  </button>
 	</div>
       </div>
     );}
