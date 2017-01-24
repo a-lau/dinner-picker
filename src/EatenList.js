@@ -19,7 +19,6 @@ export default class EatenList extends React.Component {
   }*/
 
   render() {
-	  console.log(this.state.jsonEaten)
     if(!!!this.state.jsonEaten) {
       return <div> Loading... </div>
     } else {
