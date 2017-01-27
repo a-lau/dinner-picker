@@ -7,9 +7,9 @@ import Results from './Results';
 import FoodAPIs from './FoodAPIs';
 import EatenList from './EatenList';
 
-function mapState(state) {
+function mapState(store) {
   return {
-    tab: state.Form.tab
+    tab: store.Form.tab
   } 
 }
 
@@ -54,9 +54,10 @@ class App extends React.Component {
   }
   
   render() {
-    const first = (this.state.lastClicked === 'first' ? 'active' : '')
+    const first = (this.props.tab === 'first' ? 'active' : '')
     const second = (this.state.lastClicked === 'second' ? 'active' : '')
     const third = (this.state.lastClicked === 'third' ? 'active' : '')
+    console.log(this.props.tab)
     
     return (
       <div>
