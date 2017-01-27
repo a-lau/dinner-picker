@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Picker from './Picker';
 import Manager from './Manager';
@@ -6,7 +7,13 @@ import Results from './Results';
 import FoodAPIs from './FoodAPIs';
 import EatenList from './EatenList';
 
-export default class App extends React.Component {
+function mapState(state) {
+  return {
+    tab: state.Form.tab
+  } 
+}
+
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.clickFirst=this.clickFirst.bind(this);
@@ -77,3 +84,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default connect(mapState)(App);
