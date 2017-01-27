@@ -33,6 +33,32 @@ class App extends React.Component {
       this.setState({eatenList: newList})
     });
   }
+
+  setTabFocus() {
+    switch (this.props.tabClicked) {
+      case "first":
+		return (
+		  <div className={"ui bottom attached tab segment active"} data-tab="first">
+		    <Picker getResults={this.getResults} />
+		    <Results results={this.state.results} getPicked={this.getPicked} />
+	      </div>
+	  );
+      case "second":
+		return (
+		  <div className={"ui bottom attached tab segment active"} data-tab="second">
+		    <Manager />
+		  </div>
+	  );
+      case "third":
+		return (
+		  <div className={"ui bottom attached tab segment active"} data-tab="third">
+		    <EatenList el={this.state.eatenList} />
+		  </div>
+	  );
+      default:
+		return null
+    }
+  }
   
   clickFirst(e) {
     e.preventDefault();
@@ -59,7 +85,6 @@ class App extends React.Component {
     const first = (this.props.tabClicked === 'first' ? 'active' : '')
     const second = (this.props.tabClicked === 'second' ? 'active' : '')
     const third = (this.props.tabClicked === 'third' ? 'active' : '')
-    console.log(this.props.tabClicked)
     
     return (
       <div>
@@ -70,19 +95,10 @@ class App extends React.Component {
         </h1>
         <div className="ui top attached tabular menu">
           <a className={"item "+first} data-tab="first" onClick={this.clickFirst}>Pick a meal</a>
-	  <a className={"item "+second} data-tab="second" onClick={this.clickSecond}>Manage meals</a>
-	  <a className={"item "+third} data-tab="third" onClick={this.clickThird}>Eating history</a>
+	      <a className={"item "+second} data-tab="second" onClick={this.clickSecond}>Manage meals</a>
+	      <a className={"item "+third} data-tab="third" onClick={this.clickThird}>Eating history</a>
         </div>
-        <div className={"ui bottom attached tab segment "+first} data-tab="first">
-          <Picker getResults={this.getResults} />
-	  <Results results={this.state.results} getPicked={this.getPicked} />
-        </div>
-        <div className={"ui bottom attached tab segment "+second} data-tab="second">
-  	  <Manager />
-        </div>
-        <div className={"ui bottom attached tab segment "+third} data-tab="third">
-	  <EatenList el={this.state.eatenList} />
-	</div>
+		{this.setTabFocus()}
       </div>
     );
   }
