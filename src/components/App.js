@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import './App.css';
 import Picker from './Picker';
 import Manager from './Manager';
@@ -7,9 +6,12 @@ import Results from './Results';
 import FoodAPIs from './FoodAPIs';
 import EatenList from './EatenList';
 
+import { connect } from 'react-redux';
+import { setClickedTab } from '../actions/tabActions';
+
 function mapState(store) {
   return {
-    tab: store.Form.tab
+    tabClicked: store.Tab.tabClicked
   } 
 }
 
@@ -34,15 +36,15 @@ class App extends React.Component {
   
   clickFirst(e) {
     e.preventDefault();
-    this.setState({lastClicked: 'first'});
+	this.props.dispatch(setClickedTab("first"))
   } 
   clickSecond(e) {
     e.preventDefault();
-    this.setState({lastClicked: 'second'});
+	this.props.dispatch(setClickedTab("second"))
   }
   clickThird(e) {
     e.preventDefault();
-    this.setState({lastClicked: 'third'});
+	this.props.dispatch(setClickedTab("third"))
   }
 
   getResults(results) {
@@ -54,10 +56,10 @@ class App extends React.Component {
   }
   
   render() {
-    const first = (this.props.tab === 'first' ? 'active' : '')
-    const second = (this.state.lastClicked === 'second' ? 'active' : '')
-    const third = (this.state.lastClicked === 'third' ? 'active' : '')
-    console.log(this.props.tab)
+    const first = (this.props.tabClicked === 'first' ? 'active' : '')
+    const second = (this.props.tabClicked === 'second' ? 'active' : '')
+    const third = (this.props.tabClicked === 'third' ? 'active' : '')
+    console.log(this.props.tabClicked)
     
     return (
       <div>

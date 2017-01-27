@@ -7,7 +7,6 @@ import '../semantic/dist/semantic.min.css';
 
 import Store from './components/app_store.js';
 
-Store.dispatch({type: "FOO"})
 ReactDOM.render(
   <Provider store={Store}>
     <App />
