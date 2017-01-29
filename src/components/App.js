@@ -38,31 +38,31 @@ class App extends React.Component {
   renderTab() {
     switch (this.props.tabClicked) {
       case "first":
-		return (
-		  <div className={"ui bottom attached tab segment active"} data-tab="first">
-		    <Picker getResults={this.getResults} />
-		    <Results results={this.state.results} getPicked={this.getPicked} />
-	      </div>
-	  );
+        return (
+	  <div className={"ui bottom attached tab segment active"} data-tab="first">
+	    <Picker getResults={this.getResults} />
+	    <Results results={this.state.results} getPicked={this.getPicked} />
+	  </div>
+	);
       case "second":
-		return (
-		  <div className={"ui bottom attached tab segment active"} data-tab="second">
-		    <Manager />
-		  </div>
-	  );
+	return (
+	  <div className={"ui bottom attached tab segment active"} data-tab="second">
+	    <Manager />
+	  </div>
+	);
       case "third":
-		return (
-		  <div className={"ui bottom attached tab segment active"} data-tab="third">
-		    <EatenList el={this.state.eatenList} />
-		  </div>
-	  );
+	return (
+	  <div className={"ui bottom attached tab segment active"} data-tab="third">
+	    <EatenList el={this.state.eatenList} />
+	  </div>
+	);
       default:
-		return null
+	return null
     }
   }
   
   setTabFocus(tab) {
-	this.props.dispatch(setClickedTab(tab))
+    this.props.dispatch(setClickedTab(tab))
   } 
 
   getResults(results) {
@@ -83,10 +83,10 @@ class App extends React.Component {
         </h1>
         <div className="ui top attached tabular menu">
           <a className={"item "+this.isActiveTab("first")} data-tab="first" onClick={ () => this.setTabFocus("first")}>Pick a meal</a>
-	      <a className={"item "+this.isActiveTab("second")} data-tab="second" onClick={() => this.setTabFocus("second")}>Manage meals</a>
-	      <a className={"item "+this.isActiveTab("third")} data-tab="third" onClick={() => this.setTabFocus("third")}>Eating history</a>
+	  <a className={"item "+this.isActiveTab("second")} data-tab="second" onClick={() => this.setTabFocus("second")}>Manage meals</a>
+	  <a className={"item "+this.isActiveTab("third")} data-tab="third" onClick={() => this.setTabFocus("third")}>Eating history</a>
         </div>
-		{this.renderTab()}
+	{this.renderTab()}
       </div>
     );
   }
