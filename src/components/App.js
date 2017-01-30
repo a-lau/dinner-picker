@@ -11,7 +11,7 @@ import { setClickedTab } from '../actions/tabActions';
 
 function mapState(store) {
   return {
-    tabClicked: store.Tab.tabClicked
+    tabClicked: store.tab.tabClicked
   } 
 }
 

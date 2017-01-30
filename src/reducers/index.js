@@ -1,9 +1,11 @@
 import { combineReducers } 		from 'redux';
 import { reducer as reduxFormReducer } 	from 'redux-form';
 
-import Tab from './tabReducer.js';
+import tab from './tabReducer.js';
+import selectionlistReducer from './selectionlistReducer.js';
 
 export default combineReducers({
-  Tab: Tab,
+  tab: tab,
+  slist: selectionlistReducer,
   form: reduxFormReducer
 });
