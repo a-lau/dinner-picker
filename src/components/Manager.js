@@ -4,7 +4,18 @@ import FoodAPIs from './FoodAPIs'
 import FoodList from './FoodList'
 import ErrorDisplay from './ErrorDisplay'
 
-export default class Manager extends React.Component {
+import { connect } from 'react-redux';
+import * as slist from '../actions/selectionListActions';
+
+function mapState(store) {
+  return {
+    fetching: store.slist.fetching,
+    fetched: store.slist.fetched,
+	selectionList: store.slist.selectionList
+  }
+}
+
+class Manager extends React.Component {
     constructor(props) {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
@@ -13,7 +24,7 @@ export default class Manager extends React.Component {
       this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
       this.state = {jsonResults: null, selectValue: 10, error: false};
     }
-   
+
     clickAdd(e) { 
       e.preventDefault();
       this.setState({error: false})
@@ -34,9 +45,7 @@ export default class Manager extends React.Component {
     }
 
     componentDidMount() {
-      FoodAPIs.getList().then(json => {
-	this.setState({jsonResults: json})
-      }); 
+	  this.props.dispatch(slist.fetchSelList())
     }
 
     handleChange(e) {
@@ -60,6 +69,7 @@ export default class Manager extends React.Component {
     }
 
     render() {
+			console.log(this.props.selectionList)
       return(
 	<div>
 	  <ErrorDisplay displayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
@@ -91,3 +101,5 @@ export default class Manager extends React.Component {
 
     }
 }
+
+export default connect(mapState)(Manager);
