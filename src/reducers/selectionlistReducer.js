@@ -23,6 +23,18 @@ const selectionlistReducer = (state=initialState, action) => {
 	selectionList: action.payload
       }
     }
+    case "UPDATE_ITEM": {
+      return {
+        ...state,
+	selectionList: action.payload
+      }
+    }
+    case "ADD_ITEM": {
+      return {
+        ...state,
+	selectionList: action.payload
+      }
+    }
     default:
   }
   return state

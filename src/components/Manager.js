@@ -11,7 +11,7 @@ function mapState(store) {
   return {
     fetching: store.slist.fetching,
     fetched: store.slist.fetched,
-	selectionList: store.slist.selectionList
+    selectionList: store.slist.selectionList
   }
 }
 
@@ -26,7 +26,7 @@ class Manager extends React.Component {
     }
 
     clickAdd(e) { 
-      e.preventDefault();
+/*      e.preventDefault();
       this.setState({error: false})
       const newFood = {
         name: this.refs.meal_input.value,
@@ -41,11 +41,12 @@ class Manager extends React.Component {
 	 } else {
 	   this.setState({error: true})
 	 }
-      })
+      })*/
+      this.props.dispatch(slist.addItem("foo"));
     }
 
     componentDidMount() {
-	  this.props.dispatch(slist.fetchSelList())
+      this.props.dispatch(slist.fetchSelList())
     }
 
     handleChange(e) {
@@ -74,7 +75,7 @@ class Manager extends React.Component {
 	<div>
 	  <ErrorDisplay displayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
   	  <div>
-	    <FoodList fl={this.state.jsonResults} dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} updateList={this.updateList} />
+	    <FoodList fl={this.props.selectionList} dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} updateList={this.updateList} />
 	  </div>
           <div className="ui divider"></div>
 	  <h4 className="ui header">Add an entry</h4>

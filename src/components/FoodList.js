@@ -1,6 +1,16 @@
-import React from 'react'
+import React from 'react';
+import FoodAPIs from './FoodAPIs';
 
-import FoodAPIs from './FoodAPIs'
+import { connect } from 'react-redux';
+import * as slist from '../actions/selectionListActions';
+
+function mapState(store) {
+  return {
+    fetching: store.slist.fetching,
+    fetched: store.slist.fetched,
+    selectionList: store.slist.selectionList
+  }
+}
 
 class InputField extends React.Component {
   
@@ -25,7 +35,7 @@ class InputField extends React.Component {
   }
 }
 
-export default class FoodList extends React.Component {
+class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
@@ -62,7 +72,7 @@ export default class FoodList extends React.Component {
   }
 
   clickSave() {
-    const updatedItem = {};
+    /*const updatedItem = {};
     updatedItem.key = this.state.inputVal;
     updatedItem.name = this.state.inputVal;
     updatedItem.old = this.state.editing;
@@ -75,7 +85,8 @@ export default class FoodList extends React.Component {
       } else {
 	this.props.toggleErrorDialog(true)
       }
-    })
+    })*/
+    this.props.dispatch(slist.updateItem("foo"))
   }
 
   cancelEdit() {
@@ -143,3 +154,5 @@ export default class FoodList extends React.Component {
     }
   }
 }
+
+export default connect(mapState)(FoodList);
