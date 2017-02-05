@@ -5,7 +5,7 @@ const initialState = {
   selectionList: [],
 }
 
-const selectionlistReducer = (state=initialState, action) => {
+const selectionListReducer = (state=initialState, action) => {
 		console.log("in slist reducer")
 				console.log(state)
   switch (action.type) {
@@ -35,9 +35,15 @@ const selectionlistReducer = (state=initialState, action) => {
 	selectionList: action.payload
       }
     }
+    case "DEL_ITEM": {
+      return {
+        ...state,
+	selectionList: action.payload
+      }
+    }
     default:
   }
   return state
 }
 
-export default selectionlistReducer;
+export default selectionListReducer;

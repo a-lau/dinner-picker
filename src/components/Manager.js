@@ -20,9 +20,8 @@ class Manager extends React.Component {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.updateList = this.updateList.bind(this);
       this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
-      this.state = {jsonResults: null, selectValue: 10, error: false};
+      this.state = {selectValue: 10, error: false};
     }
 
     clickAdd(e) { 
@@ -46,7 +45,7 @@ class Manager extends React.Component {
     }
 
     componentDidMount() {
-      this.props.dispatch(slist.fetchSelList())
+      this.props.dispatch(slist.fetchList())
     }
 
     handleChange(e) {
@@ -61,10 +60,6 @@ class Manager extends React.Component {
       }
     }
 
-    updateList(list) {
-      this.setState({jsonResults: list})
-    }
-
     toggleErrorDialog(displayError) {
       this.setState({error: displayError})
     }
@@ -75,7 +70,7 @@ class Manager extends React.Component {
 	<div>
 	  <ErrorDisplay displayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
   	  <div>
-	    <FoodList fl={this.props.selectionList} dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} updateList={this.updateList} />
+	    <FoodList dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
 	  </div>
           <div className="ui divider"></div>
 	  <h4 className="ui header">Add an entry</h4>

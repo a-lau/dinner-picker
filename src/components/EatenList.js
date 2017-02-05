@@ -1,13 +1,19 @@
 import React from 'react';
 
-export default class EatenList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {jsonEaten: null}
-  }
+import { connect } from 'react-redux';
+import * as elist from '../actions/eatenListActions';
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({jsonEaten: nextProps.el});
+function mapState(store) {
+  return {
+    fetching: store.elist.fetching,
+    fetched: store.elist.fetched,
+    eatenList: store.elist.eatenList
+  }
+}
+
+class EatenList extends React.Component {
+  componentWillMount() {
+    this.props.dispatch(elist.fetchList())
   }
 
   /*getEatenList(list) {
@@ -19,7 +25,8 @@ export default class EatenList extends React.Component {
   }*/
 
   render() {
-    if(!!!this.state.jsonEaten) {
+	  console.log(this.props.eatenList)
+    if(this.props.fetching) {
       return <div> Loading... </div>
     } else {
     return (
@@ -29,7 +36,7 @@ export default class EatenList extends React.Component {
 	  <th className="four wide">Date</th>
 	</tr></thead>
         <tbody>
-        {this.state.jsonEaten.map(function(item) {
+        {this.props.eatenList.map(function(item) {
 	  var newDate = new Date(item.dateUsed).toString().substring(0,16)
           return (
 	    <tr key={item.key}>
@@ -42,3 +49,5 @@ export default class EatenList extends React.Component {
    )}
   }
 }
+
+export default connect(mapState)(EatenList);

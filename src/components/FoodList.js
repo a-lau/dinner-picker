@@ -39,22 +39,23 @@ class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {jsonResults: props.fl, editing: null, selectValue: 10, inputVal: null, error: props.displayError}
+    this.state = {editing: null, selectValue: 10, inputVal: null, error: props.displayError}
     this.handleChange = this.handleChange.bind(this);
     this.updateInput = this.updateInput.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({jsonResults: nextProps.fl, error: nextProps.displayError})
+    this.setState({error: nextProps.displayError})
   }
 
   clickDelete(props) {
-    const delFood = {
+   /* const delFood = {
       key: props 
     };
     FoodAPIs.delFood(delFood).then((res) => {
       this.props.updateList(res)
-    })
+    })*/
+    this.props.dispatch(slist.delItem("foo"))
   }
 
   toggleEdit(item) {
@@ -141,12 +142,12 @@ class FoodList extends React.Component {
   }
 
   render() {
-    if (!!!this.state.jsonResults) {
+    if (this.props.fetching) {
       return <div>Loading...</div>
     } else {
       return (
         <div className="ui middle aligned selection list">
-	  {this.state.jsonResults.map(function(item) {
+	  {this.props.selectionList.map(function(item) {
 	    return this.renderItemOrEditField(item)
 	  }, this)}
 	</div>
