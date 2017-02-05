@@ -13,6 +13,7 @@ function mapState(store) {
 
 class EatenList extends React.Component {
   componentWillMount() {
+    // needs reversing
     this.props.dispatch(elist.fetchList())
   }
 

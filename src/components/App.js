@@ -20,15 +20,7 @@ class App extends React.Component {
     super(props);
     this.getResults = this.getResults.bind(this);
     this.getPicked = this.getPicked.bind(this);
-    this.state={lastClicked: 'first', results: null, eatenList: null};
-  }
-
-  componentDidMount() {
-    FoodAPIs.getEaten().then(json => {
-      var newList = json
-      newList.reverse()
-      this.setState({eatenList: newList})
-    });
+    this.state={results: null, eatenList: null};
   }
 
   isActiveTab(tabName) {
@@ -53,7 +45,7 @@ class App extends React.Component {
       case "third":
 	return (
 	  <div className={"ui bottom attached tab segment active"} data-tab="third">
-	    <EatenList el={this.state.eatenList} />
+	    <EatenList />
 	  </div>
 	);
       default:
