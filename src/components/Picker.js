@@ -1,15 +1,26 @@
-import React from 'react'
-import FoodAPIs from './FoodAPIs'
+import React from 'react';
+import FoodAPIs from './FoodAPIs';
 
-export default class Picker extends React.Component {
-  
+import { connect } from 'react-redux';
+import * as slist from '../actions/selectionListActions';
+import * as foodChoice from '../actions/foodChoiceActions';
+
+function mapState(store) {
+  return {
+    selectionList: store.slist.selectionList,
+    displayFood: store.foodChoice.displayFood,
+  }
+}
+
+class Picker extends React.Component {
+
   constructor(props) {
     super(props);
     this.pickFood = this.pickFood.bind(this);
   }
   
   pickFood() {
-    FoodAPIs.getList().then(json => {
+    /*FoodAPIs.getList().then(json => {
       const tempCompare = {
 	key: null,
 	val: null,
@@ -39,13 +50,10 @@ export default class Picker extends React.Component {
 	}
       return null
       })
-      this.props.getResults(tempCompare);
-      this.updatePicked(tempCompare);
-    });
-  }
-
-  updatePicked(item) {
-    FoodAPIs.updatePicked(item)
+      this.props.dispatch(foodChoice.setDisplayFood(tempCompare));
+      // new dispatch to update the chosen item
+    });*/
+      this.props.dispatch(foodChoice.setDisplayFood("tempCompare"));
   }
 
   render() {
@@ -56,3 +64,5 @@ export default class Picker extends React.Component {
     );
   }
 }
+
+export default connect(mapState)(Picker);

@@ -1,8 +1,18 @@
-import React from 'react'
-import FoodAPIs from './FoodAPIs'
-import SelectButton from './SelectButton'
+import React from 'react';
+import FoodAPIs from './FoodAPIs';
+import SelectButton from './SelectButton';
 
-export default class Results extends React.Component {
+import { connect } from 'react-redux';
+import * as foodChoice from '../actions/foodChoiceActions';
+
+function mapState(store) {
+  return {
+    chosenFood: store.foodChoice.chosenFood,
+    displayFood: store.foodChoice.displayFood,
+  }
+}
+
+class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {results: props.results, buttonText: "Sounds good", green: false};
@@ -49,3 +59,5 @@ export default class Results extends React.Component {
     );}
   }
 }
+
+export default connect(mapState)(Results);
