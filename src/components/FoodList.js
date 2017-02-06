@@ -1,5 +1,4 @@
 import React from 'react';
-import FoodAPIs from './FoodAPIs';
 
 import { connect } from 'react-redux';
 import * as slist from '../actions/selectionListActions';
@@ -49,13 +48,10 @@ class FoodList extends React.Component {
   }
 
   clickDelete(props) {
-   /* const delFood = {
+    const delFood = {
       key: props 
     };
-    FoodAPIs.delFood(delFood).then((res) => {
-      this.props.updateList(res)
-    })*/
-    this.props.dispatch(slist.delItem("foo"))
+    this.props.dispatch(slist.delItem(delFood))
   }
 
   toggleEdit(item) {
@@ -68,7 +64,6 @@ class FoodList extends React.Component {
   }
 
   updateInput(item) {
-    this.props.toggleErrorDialog(false)
     this.setState({inputVal: item});
   }
 

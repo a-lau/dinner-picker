@@ -1,6 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-export default class ErrorDisplay extends React.Component {
+import { connect } from 'react-redux';
+import { clearError } from '../actions/selectionListActions'; 
+
+function mapState(store) {
+  return {}
+}
+
+class ErrorDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {error: props.displayError};
@@ -12,7 +19,7 @@ export default class ErrorDisplay extends React.Component {
   }
 
   dismissDialog() {
-    this.props.toggleErrorDialog(false);
+    this.setState({error: false})
   }
 
   render() {
@@ -29,3 +36,5 @@ export default class ErrorDisplay extends React.Component {
     }
   }
 }
+
+export default connect(mapState)(ErrorDisplay);

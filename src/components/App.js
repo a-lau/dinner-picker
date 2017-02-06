@@ -3,7 +3,6 @@ import './App.css';
 import Picker from './Picker';
 import Manager from './Manager';
 import Results from './Results';
-import FoodAPIs from './FoodAPIs';
 import EatenList from './EatenList';
 
 import { connect } from 'react-redux';

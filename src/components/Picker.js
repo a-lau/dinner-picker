@@ -1,5 +1,4 @@
 import React from 'react';
-import FoodAPIs from './FoodAPIs';
 
 import { connect } from 'react-redux';
 import * as slist from '../actions/selectionListActions';

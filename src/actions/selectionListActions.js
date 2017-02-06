@@ -1,38 +1,47 @@
 
+import FoodAPIs from '../services/FoodAPIs'
+
 export function fetchList() {
-  return {
-    type: "FETCH_SLIST_FULFILLED",
-      payload: [
-	{ name: "Hamburgers", key: "Hamburgers", weight: 10, modDate: 1999, lastUsed: 2000},
-	{ name: "Hamburger", key: "Hamburger", weight: 5, modDate: 1999, lastUsed: 2000}
-      ]
+  return function(dispatch) {
+    FoodAPIs.getList().then((response) => {
+      dispatch({type: "FETCH_SLIST_FULFILLED", payload: response})
+	})
+	.catch((err) => {
+	  dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
+	})
   }
 }
 export function updateItem(item) {
-  return {
-    type: "UPDATE_ITEM",
-      payload: [
-	{ name: "Hamburgers", key: "Hamburgers", weight: 10, modDate: 1999, lastUsed: 2000},
-	{ name: "Hot Dog", key: "Hot Dog", weight: 5, modDate: 1999, lastUsed: 2000}
-      ]
+  return function(dispatch) {
+	FoodAPIs.editFood(item).then((response) => {
+      dispatch({type: "UPDATE_ITEM", payload: response})
+    })
+  .catch((err) => {
+      dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
+    })
   }
 }
 export function addItem(item) {
-  return {
-    type: "ADD_ITEM",
-      payload: [
-	{ name: "Hamburgers", key: "Hamburgers", weight: 10, modDate: 1999, lastUsed: 2000},
-	{ name: "Hot Dog", key: "Hot Dog", weight: 5, modDate: 1999, lastUsed: 2000},
-	{ name: "Ramen", key: "Ramen", weight: 6, modDate: 1999, lastUsed: 2000}
-      ]
+  return function(dispatch) {
+	FoodAPIs.addFood(item).then((response) => {
+      dispatch({type: "ADD_ITEM", payload: response})
+    })
+  .catch((err) => {
+      dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
+    })
   }
 }
 export function delItem(item) {
+  return function(dispatch) {
+	FoodAPIs.delFood(item).then((response) => {
+      dispatch({type: "DEL_ITEM", payload: response})
+    })
+  }
+}
+
+export function clearError() {
   return {
-    type: "DEL_ITEM",
-      payload: [
-	{ name: "Hamburgers", key: "Hamburgers", weight: 10, modDate: 1999, lastUsed: 2000},
-	{ name: "Ramen", key: "Ramen", weight: 6, modDate: 1999, lastUsed: 2000}
-      ] 
+    type: "CLEAR_ITEM",
+	payload: false
   }
 }

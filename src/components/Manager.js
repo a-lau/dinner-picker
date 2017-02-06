@@ -1,6 +1,5 @@
 import React from 'react'
 
-import FoodAPIs from './FoodAPIs'
 import FoodList from './FoodList'
 import ErrorDisplay from './ErrorDisplay'
 
@@ -11,6 +10,7 @@ function mapState(store) {
   return {
     fetching: store.slist.fetching,
     fetched: store.slist.fetched,
+	error: store.slist.error,
     selectionList: store.slist.selectionList
   }
 }
@@ -20,28 +20,19 @@ class Manager extends React.Component {
       super(props);
       this.clickAdd = this.clickAdd.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
-      this.state = {selectValue: 10, error: false};
+      this.state = {selectValue: 10};
     }
 
     clickAdd(e) { 
-/*      e.preventDefault();
-      this.setState({error: false})
+      e.preventDefault();
+      this.props.dispatch(slist.clearError())
       const newFood = {
         name: this.refs.meal_input.value,
         key: this.refs.meal_input.value,
         date: Date.now(),
         weight: this.state.selectValue
       };
-      FoodAPIs.addFood(newFood).then((res) => {
-	 if( !res.error ) {
-	   this.setState({jsonResults: res, selectValue: 10})
-	   this.refs.meal_input.value = "";
-	 } else {
-	   this.setState({error: true})
-	 }
-      })*/
-      this.props.dispatch(slist.addItem("foo"));
+      this.props.dispatch(slist.addItem(newFood));
     }
 
     componentDidMount() {
@@ -60,17 +51,13 @@ class Manager extends React.Component {
       }
     }
 
-    toggleErrorDialog(displayError) {
-      this.setState({error: displayError})
-    }
-
     render() {
-			console.log(this.props.selectionList)
+			console.log("manager render")
       return(
 	<div>
-	  <ErrorDisplay displayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
+	  <ErrorDisplay displayError={this.props.error} />
   	  <div>
-	    <FoodList dislayError={this.state.error} toggleErrorDialog={this.toggleErrorDialog} />
+	    <FoodList dislayError={this.state.error} />
 	  </div>
           <div className="ui divider"></div>
 	  <h4 className="ui header">Add an entry</h4>

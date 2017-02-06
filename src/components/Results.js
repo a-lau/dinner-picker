@@ -1,5 +1,4 @@
 import React from 'react';
-import FoodAPIs from './FoodAPIs';
 import SelectButton from './SelectButton';
 
 import { connect } from 'react-redux';
