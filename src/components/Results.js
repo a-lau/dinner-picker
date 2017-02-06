@@ -7,29 +7,23 @@ import * as foodChoice from '../actions/foodChoiceActions';
 
 function mapState(store) {
   return {
-    chosenFood: store.foodChoice.chosenFood,
-    displayFood: store.foodChoice.displayFood,
+    displayedFood: store.foodChoice.displayedFood,
   }
 }
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {results: props.results, buttonText: "Sounds good", green: false};
-    this.getFood = this.getFood.bind(this);
+    this.state = {buttonText: "Sounds good", green: false};
+    this.resetButton = this.resetButton.bind(this);
     this.updateButton = this.updateButton.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({results: nextProps.results})
-
+  componentWillMount() {
+    this.resetButton
   }
 
-  getFood(food) {
-    FoodAPIs.addEaten(food).then((res) => {
-      this.props.getPicked(res)
-    })
-    console.log("get Food")
+  resetButton() {
     this.setState({buttonText: "Sounds good", green: false})
   }
 
@@ -39,21 +33,22 @@ class Results extends React.Component {
   }
 
   render() {
-    if( !!!this.state.results ) {
+	  console.log("results render")
+	  console.log(this.props.displayedFood)
+    if( !this.props.displayedFood ) {
       return null
     } else {
-      var newDate = new Date(this.state.results.date).toString().substring(0,16)
+      var newDate = new Date(this.props.displayedFood.date).toString().substring(0,16)
     return (
       <div>
         <h2 className="ui center aligned icon header">
 	  <i className="circular pie chart icon"></i>
 	   Your dinner: 
         </h2>
-        <h1 className="ui center aligned header"> {this.state.results.key} </h1>
+        <h1 className="ui center aligned header"> {this.props.displayedFood.key} </h1>
 	<h5 className="ui center aligned header"> Last had: {newDate} </h5>
 	<div className="div_button">
-	  <SelectButton selected={this.state.results.key} getFood={this.getFood}
-	                buttonText={this.state.buttonText} green={this.state.green} updateButton={this.updateButton} />
+	  <SelectButton resetButton={this.resetButton} buttonText={this.state.buttonText} green={this.state.green} updateButton={this.updateButton} />
 	</div>
       </div>
     );}

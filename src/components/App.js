@@ -20,7 +20,7 @@ class App extends React.Component {
     super(props);
     this.getResults = this.getResults.bind(this);
     this.getPicked = this.getPicked.bind(this);
-    this.state={results: null, eatenList: null};
+    this.state={results: null};
   }
 
   isActiveTab(tabName) {
@@ -32,8 +32,8 @@ class App extends React.Component {
       case "first":
         return (
 	  <div className={"ui bottom attached tab segment active"} data-tab="first">
-	    <Picker getResults={this.getResults} />
-	    <Results results={this.state.results} getPicked={this.getPicked} />
+	    <Picker />
+	    <Results />
 	  </div>
 	);
       case "second":

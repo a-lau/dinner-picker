@@ -1,5 +1,5 @@
 
-export function setDisplayFood() {
+export function setDisplayedFood() {
   return {
     type: "SET_DISPLAYED_FOOD",
       payload: {

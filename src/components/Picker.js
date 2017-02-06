@@ -8,7 +8,7 @@ import * as foodChoice from '../actions/foodChoiceActions';
 function mapState(store) {
   return {
     selectionList: store.slist.selectionList,
-    displayFood: store.foodChoice.displayFood,
+    displayedFood: store.foodChoice.displayedFood,
   }
 }
 
@@ -53,7 +53,7 @@ class Picker extends React.Component {
       this.props.dispatch(foodChoice.setDisplayFood(tempCompare));
       // new dispatch to update the chosen item
     });*/
-      this.props.dispatch(foodChoice.setDisplayFood("tempCompare"));
+      this.props.dispatch(foodChoice.setDisplayedFood("tempCompare"));
   }
 
   render() {
