@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { clearError } from '../actions/selectionListActions'; 
 
 function mapState(store) {
-  return {}
+  return {
+    error: store.slist.error
+  }
 }
 
 class ErrorDisplay extends React.Component {
@@ -19,10 +21,11 @@ class ErrorDisplay extends React.Component {
   }
 
   dismissDialog() {
-    this.setState({error: false})
+    this.props.dispatch(clearError())
   }
 
   render() {
+		  console.log(this.state.error)
     if(this.state.error) {
       return (
         <div className="ui warning message">

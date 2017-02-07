@@ -41,7 +41,7 @@ export function delItem(item) {
 
 export function clearError() {
   return {
-    type: "CLEAR_ITEM",
-	payload: false
+    type: "CLEAR_ERROR",
+	payload: false,
   }
 }
