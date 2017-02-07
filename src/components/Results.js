@@ -27,13 +27,10 @@ class Results extends React.Component {
   }
 
   updateButton(buttonText, green) {
-	  console.log("update button")
     this.setState({buttonText: buttonText, green: green})
   }
 
   render() {
-	  console.log("results render")
-	  console.log(this.props.displayedFood)
     if( !this.props.displayedFood ) {
       return null
     } else {

@@ -6,8 +6,6 @@ const initialState = {
 }
 
 const eatenListReducer = (state=initialState, action) => {
-  console.log("in elist reducer")
-  console.log(state)
   switch (action.type) {
     case "FETCH_ELIST_PENDING": {
       return {...state, fetching: true}

@@ -38,13 +38,9 @@ class FoodList extends React.Component {
  
   constructor(props) {
     super(props);
-    this.state = {editing: null, selectValue: 10, inputVal: null, error: props.displayError}
+    this.state = {editing: null, selectValue: 10, inputVal: null}
     this.handleChange = this.handleChange.bind(this);
     this.updateInput = this.updateInput.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({error: nextProps.displayError})
   }
 
   clickDelete(props) {
@@ -68,21 +64,13 @@ class FoodList extends React.Component {
   }
 
   clickSave() {
-    /*const updatedItem = {};
+    const updatedItem = {};
     updatedItem.key = this.state.inputVal;
     updatedItem.name = this.state.inputVal;
     updatedItem.old = this.state.editing;
     updatedItem.weight = this.state.selectValue;
     updatedItem.date = Date.now();
-    FoodAPIs.editFood(updatedItem).then((res) => {
-      if( !res.error ) {
-        this.setState({editing: null})
-        this.props.updateList(res)
-      } else {
-	this.props.toggleErrorDialog(true)
-      }
-    })*/
-    this.props.dispatch(slist.updateItem("foo"))
+    this.props.dispatch(slist.updateItem(updatedItem))
   }
 
   cancelEdit() {

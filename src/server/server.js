@@ -18,6 +18,7 @@ app.get('/api/v1/list_food', function (req, res) {
 })
 
 app.post('/api/v1/add_food', function (req, res) {
+	console.log(req)
   checkExists(req.body.key).then(exists => {
   if(!exists) {
     const sqlRequest = "INSERT INTO 'foodList' (name, modDate, weight, key, lastUsed) " + 

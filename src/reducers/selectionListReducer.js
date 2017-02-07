@@ -7,8 +7,6 @@ const initialState = {
 }
 
 const selectionListReducer = (state=initialState, action) => {
-		console.log("in slist reducer")
-				console.log(state)
   switch (action.type) {
     case "FETCH_SLIST_PENDING": {
       return {...state, fetching: true}

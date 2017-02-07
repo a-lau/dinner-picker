@@ -52,12 +52,11 @@ class Manager extends React.Component {
     }
 
     render() {
-			console.log("manager render")
       return(
 	<div>
 	  <ErrorDisplay displayError={this.props.error} />
   	  <div>
-	    <FoodList dislayError={this.state.error} />
+	    <FoodList />
 	  </div>
           <div className="ui divider"></div>
 	  <h4 className="ui header">Add an entry</h4>

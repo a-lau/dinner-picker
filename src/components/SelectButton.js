@@ -18,7 +18,6 @@ class SelectButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  console.log(nextProps)
     this.setState({green: nextProps.green, buttonText: nextProps.buttonText})
   }
 
@@ -32,7 +31,6 @@ class SelectButton extends React.Component {
   }
 
   render() {
-	  console.log(this.state.buttonText)
     let classes = classnames('ui button specialButton', {green: this.props.green})
     return <button className={classes} onClick={this.onClick} >{this.props.buttonText}</button>
   }

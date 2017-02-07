@@ -5,8 +5,6 @@ const initialState = {
 }
 
 const foodChoiceReducer = (state=initialState, action) => {
-  console.log("in choice reducer")
-  console.log(state)
   switch (action.type) {
     case "SET_DISPLAYED_FOOD": {
       return {...state, displayedFood: action.payload}
