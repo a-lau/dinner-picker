@@ -17,7 +17,7 @@ const eatenListReducer = (state=initialState, action) => {
 	    console.log(action.payload)
       return {
         ...state,
-	fetching: false,
+	    fetching: false,
         fetched: true,
         eatenList: action.payload
       }
@@ -25,7 +25,7 @@ const eatenListReducer = (state=initialState, action) => {
     case "ADD_ITEM": {
       return {
         ...state,
-	eatenList: action.payload
+   	    eatenList: action.payload
       }
     }
     default:

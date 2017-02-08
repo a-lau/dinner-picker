@@ -2,7 +2,7 @@ import React from 'react';
 import SelectButton from './SelectButton';
 
 import { connect } from 'react-redux';
-import * as foodChoice from '../actions/foodChoiceActions';
+//import * as foodChoice from '../actions/foodChoiceActions';
 
 function mapState(store) {
   return {
@@ -19,7 +19,7 @@ class Results extends React.Component {
   }
 
   componentWillMount() {
-    this.resetButton
+    //this.resetButton
   }
 
   resetButton() {

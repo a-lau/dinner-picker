@@ -2,11 +2,12 @@ import React from 'react';
 import classnames from 'classnames';
 
 import { connect } from 'react-redux';
-import * as foodChoice from '../actions/foodChoiceActions';
+//import * as foodChoice from '../actions/foodChoiceActions';
+import * as elist from '../actions/eatenListActions';
 
 function mapState(store) {
   return {
-    chosenFood: store.foodChoice.chosenFood
+    displayedFood: store.foodChoice.displayedFood
   }
 }
 
@@ -23,10 +24,10 @@ class SelectButton extends React.Component {
 
   onClick() {
     const food = {
-       name: this.props.selected,
+       name: this.props.displayedFood.key,
        date: Date.now(),
     }
-    this.props.dispatch(foodChoice.setChosenFood())
+    this.props.dispatch(elist.addItem(food))
     this.props.updateButton("I'm in", true)
   }
 
