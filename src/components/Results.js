@@ -2,7 +2,6 @@ import React from 'react';
 import SelectButton from './SelectButton';
 
 import { connect } from 'react-redux';
-//import * as foodChoice from '../actions/foodChoiceActions';
 
 function mapState(store) {
   return {
@@ -14,15 +13,10 @@ class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {buttonText: "Sounds good", green: false};
-    this.resetButton = this.resetButton.bind(this);
     this.updateButton = this.updateButton.bind(this);
   }
 
-  componentWillMount() {
-    //this.resetButton
-  }
-
-  resetButton() {
+  componentWillReceiveProps(props) {
     this.setState({buttonText: "Sounds good", green: false})
   }
 
