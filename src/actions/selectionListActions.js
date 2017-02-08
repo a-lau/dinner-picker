@@ -11,11 +11,11 @@ export function fetchList() {
 	})
   }
 }
-export function updateItem(item) {
+export function editItem(item) {
   return function(dispatch) {
     FoodAPIs.editFood(item).then((response) => {
 	  console.log(response)
-      dispatch({type: "UPDATE_ITEM", payload: response})
+      dispatch({type: "EDIT_ITEM", payload: response})
     })
     .catch((err) => {
       dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
@@ -39,6 +39,14 @@ export function delItem(item) {
 		console.log(response)
       dispatch({type: "DEL_ITEM", payload: response})
     })
+  }
+}
+
+export function updateItem(item) {
+  return function(dispatch) {
+    FoodAPIs.updatePicked(item).then((response) => {
+      dispatch({type: "UPDATE_ITEM", payload: response})
+	})
   }
 }
 

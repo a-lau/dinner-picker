@@ -6,6 +6,9 @@ import * as foodChoice from '../actions/foodChoiceActions';
 
 function mapState(store) {
   return {
+    fetching: store.slist.fetching,
+    fetched: store.slist.fetched,
+	error: store.slist.error,
     selectionList: store.slist.selectionList,
     displayedFood: store.foodChoice.displayedFood,
   }
@@ -17,42 +20,44 @@ class Picker extends React.Component {
     super(props);
     this.pickFood = this.pickFood.bind(this);
   }
+
+  componentDidMount() {
+    this.props.dispatch(slist.fetchList())
+  }
   
   pickFood() {
-    /*FoodAPIs.getList().then(json => {
-      const tempCompare = {
+    const tempCompare = {
 	key: null,
 	val: null,
         time: Date.now(),
     	date: null
-      }
-      json.map(function(item) {
-        const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
-	if (!!!tempCompare.val) {
-	  tempCompare.key = item.key
-	  tempCompare.val = modded
-	  if(item.lastUsed) {
+    }
+    this.props.selectionList.map(function(item) {
+      const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
+	    if (!!!tempCompare.val) {
+	      tempCompare.key = item.key
+	      tempCompare.val = modded
+	      if(item.lastUsed) {
             tempCompare.date = item.lastUsed
-	  } else {
-	    tempCompare.date = "Not yet eaten"
+	      } else {
+	        tempCompare.date = "Not yet eaten"
           }
-	} else {
-	  if (modded > tempCompare.val) {
-	    tempCompare.key = item.key
-	    tempCompare.val = modded
-	    if(item.lastUsed) {
-	      tempCompare.date = item.lastUsed
 	    } else {
-	      tempCompare.date = "Not yet eaten"
-	    }
+	      if (modded > tempCompare.val) {
+	        tempCompare.key = item.key
+	        tempCompare.val = modded
+	        if(item.lastUsed) {
+	          tempCompare.date = item.lastUsed
+	        } else {
+	          tempCompare.date = "Not yet eaten"
+	        }
           }
-	}
+	    }
       return null
-      })
-      this.props.dispatch(foodChoice.setDisplayFood(tempCompare));
-      // new dispatch to update the chosen item
-    });*/
-      this.props.dispatch(foodChoice.setDisplayedFood("tempCompare"));
+    });
+	console.log(tempCompare)
+    this.props.dispatch(foodChoice.setDisplayedFood(tempCompare))
+	this.props.dispatch(slist.updateItem(tempCompare))
   }
 
   render() {

@@ -28,7 +28,7 @@ const selectionListReducer = (state=initialState, action) => {
 	    error: action.payload
 	  }
 	}
-    case "UPDATE_ITEM": {
+    case "EDIT_ITEM": {
       return {
         ...state,
 	    selectionList: action.payload
@@ -41,6 +41,12 @@ const selectionListReducer = (state=initialState, action) => {
       }
     }
     case "DEL_ITEM": {
+      return {
+        ...state,
+	    selectionList: action.payload
+      }
+    }
+    case "UPDATE_ITEM": {
       return {
         ...state,
 	    selectionList: action.payload
