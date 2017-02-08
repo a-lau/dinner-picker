@@ -14,9 +14,10 @@ export function fetchList() {
 export function updateItem(item) {
   return function(dispatch) {
     FoodAPIs.editFood(item).then((response) => {
-    dispatch({type: "UPDATE_ITEM", payload: response})
-  })
-  .catch((err) => {
+	  console.log(response)
+      dispatch({type: "UPDATE_ITEM", payload: response})
+    })
+    .catch((err) => {
       dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
     })
   }
@@ -24,10 +25,10 @@ export function updateItem(item) {
 export function addItem(item) {
   return function(dispatch) {
 	FoodAPIs.addFood(item).then((response) => {
-		console.log(response)
+	  console.log(response.error)
       dispatch({type: "ADD_ITEM", payload: response})
     })
-  .catch((err) => {
+    .catch((err) => {
       dispatch({type: "FETCH_SLIST_REJECTED", payload: err})
     })
   }

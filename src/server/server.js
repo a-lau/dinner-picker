@@ -33,7 +33,7 @@ app.post('/api/v1/add_food', function (req, res) {
      }
    }); 
   } else {
-    res.send({ error: "duplicate entry" })
+    res.status(409).send({statusText: 'Duplicate Entry'})
   }
   });
 })
@@ -54,7 +54,7 @@ app.post('/api/v1/edit_food', function (req, res) {
       }
     });
   } else {
-    res.send({error: "Duplicate entry" })
+    res.status(409).send({statusText: 'Duplicate Entry'})
   }
   });
 })

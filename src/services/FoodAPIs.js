@@ -11,12 +11,14 @@ const FoodList = {
          headers: { 'Content-Type': 'application/json' } })
       .then(response => { 
         if (response.ok) {
+				console.log("good response")
+	 console.log(response)
 	  return response.json()
         } else {
-	  console.log("bad response")
-	  return null
-	}
-      })
+	      console.log("bad response")
+			  console.log(response)
+	      throw Error('Duplicate Entry')
+	}})
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',
@@ -28,7 +30,7 @@ const FoodList = {
 	  return response.json()
         } else {
 	  console.log("bad response")
-	  return null
+	  throw Error('Duplicate Entry')
 	}
       })
   },

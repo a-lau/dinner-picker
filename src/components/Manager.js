@@ -33,6 +33,7 @@ class Manager extends React.Component {
         weight: this.state.selectValue
       };
       this.props.dispatch(slist.addItem(newFood));
+	  this.refs.meal_input.value = "";
     }
 
     componentDidMount() {

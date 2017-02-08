@@ -71,6 +71,7 @@ class FoodList extends React.Component {
     updatedItem.weight = this.state.selectValue;
     updatedItem.date = Date.now();
     this.props.dispatch(slist.updateItem(updatedItem))
+    this.setState({editing: null})
   }
 
   cancelEdit() {
