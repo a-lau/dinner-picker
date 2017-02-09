@@ -36,15 +36,16 @@ class Results extends React.Component {
 	        <SelectButton resetButton={this.resetButton} buttonText={this.state.buttonText} green={this.state.green} updateButton={this.updateButton} />
 	      </div>
 		</div>
-	)}
+	  )
+	}
   }
 
   render() {
     return (
       <div>
         <h2 className="ui center aligned icon header">
-	  <i className="circular pie chart icon"></i>
-	   Your dinner: 
+	      <i className="circular pie chart icon"></i>
+	      Your dinner: 
         </h2>
         <h1 className="ui center aligned header"> {this.props.displayedFood.key} </h1>
 		{this.initialRender()}

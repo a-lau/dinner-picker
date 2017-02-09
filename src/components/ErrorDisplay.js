@@ -25,15 +25,14 @@ class ErrorDisplay extends React.Component {
   }
 
   render() {
-		  console.log(this.state.error)
     if(this.state.error) {
       return (
         <div className="ui warning message">
-	  <i className="close icon" onClick={this.dismissDialog}></i>
-	  <div className="header">
-	    Action failed! Duplicate entry exists.
-	   </div>
-	</div>
+	      <i className="close icon" onClick={this.dismissDialog}></i>
+	      <div className="header">
+	        Action failed! Duplicate entry exists.
+	      </div>
+	    </div>
     )} else {
       return null
     }

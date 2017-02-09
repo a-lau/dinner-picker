@@ -1,5 +1,5 @@
 
-import FoodAPIs from '../services/FoodAPIs'
+import FoodAPIs from '../services/FoodAPIs';
 
 export function fetchList() {
   return function(dispatch) {
@@ -14,7 +14,6 @@ export function fetchList() {
 export function editItem(item) {
   return function(dispatch) {
     FoodAPIs.editFood(item).then((response) => {
-	  console.log(response)
       dispatch({type: "EDIT_ITEM", payload: response})
     })
     .catch((err) => {
@@ -25,7 +24,6 @@ export function editItem(item) {
 export function addItem(item) {
   return function(dispatch) {
 	FoodAPIs.addFood(item).then((response) => {
-	  console.log(response.error)
       dispatch({type: "ADD_ITEM", payload: response})
     })
     .catch((err) => {
@@ -36,7 +34,6 @@ export function addItem(item) {
 export function delItem(item) {
   return function(dispatch) {
 	FoodAPIs.delFood(item).then((response) => {
-		console.log(response)
       dispatch({type: "DEL_ITEM", payload: response})
     })
   }

@@ -1,5 +1,5 @@
 
-import FoodAPIs from '../services/FoodAPIs'
+import FoodAPIs from '../services/FoodAPIs';
 
 export function fetchList() {
   return function(dispatch) {

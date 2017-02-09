@@ -55,7 +55,6 @@ class Picker extends React.Component {
 	    }
       return null
     });
-	console.log(tempCompare)
     this.props.dispatch(foodChoice.setDisplayedFood(tempCompare))
 	this.props.dispatch(slist.updateItem(tempCompare))
   }

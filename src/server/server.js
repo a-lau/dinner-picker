@@ -22,7 +22,7 @@ app.post('/api/v1/add_food', function (req, res) {
   checkExists(req.body.key).then(exists => {
   if(!exists) {
     const sqlRequest = "INSERT INTO 'foodList' (name, modDate, weight, key, lastUsed) " + 
-	               "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "', NULL)"
+  	                   "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "', NULL)"
     db.run(sqlRequest, function(err) {
       if(err !== null) {
         next(err);
@@ -42,7 +42,7 @@ app.post('/api/v1/edit_food', function (req, res) {
   checkExists(req.body.key).then(exists => {
   if(!exists || req.body.old == req.body.key) {
     const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
-  	               "modDate='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
+  	                   "modDate='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
                        "WHERE name='" + req.body.old + "'"
     db.run(sqlRequest, function(err) {
       if(err !== null) {
@@ -129,10 +129,10 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
     else if(rows === undefined) {
       db.run('CREATE TABLE "foodList" ' +  
              '("name" TEXT, ' + 
-	     '"lastUsed" INTEGER, ' +
-	     '"modDate" INTEGER, ' + 
-	     '"weight" INTEGER, ' +
-             '"key" TEXT)', function(err) {
+	          '"lastUsed" INTEGER, ' +
+	          '"modDate" INTEGER, ' + 
+	          '"weight" INTEGER, ' +
+              '"key" TEXT)', function(err) {
       if(err != null) {
         console.log(err);
       }
@@ -153,8 +153,8 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='eatenList'",
     } else if(rows === undefined) {
       db.run('CREATE TABLE "eatenList" ' +
              '("name" TEXT, ' +
-             '"dateUsed" INTEGER, ' +
-	     '"key" INTEGER PRIMARY KEY)', function(err) {
+              '"dateUsed" INTEGER, ' +
+	          '"key" INTEGER PRIMARY KEY)', function(err) {
     if(err != null) {
       console.log(err);
     } else {

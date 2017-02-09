@@ -1,5 +1,4 @@
 import { combineReducers } 		from 'redux';
-import { reducer as reduxFormReducer } 	from 'redux-form';
 
 import tab from './tabReducer.js';
 import selectionListReducer from './selectionListReducer.js';
@@ -11,5 +10,4 @@ export default combineReducers({
   slist: selectionListReducer,
   elist: eatenListReducer,
   foodChoice: foodChoiceReducer,
-  form: reduxFormReducer
 });
