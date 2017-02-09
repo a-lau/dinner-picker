@@ -24,11 +24,22 @@ class Results extends React.Component {
     this.setState({buttonText: buttonText, green: green})
   }
 
-  render() {
-    if( !this.props.displayedFood ) {
+  initialRender() {
+    if( this.props.displayedFood.key === undefined ) {
       return null
-    } else {
+	} else {
       var newDate = new Date(this.props.displayedFood.date).toString().substring(0,16)
+      return (
+        <div>
+	      <h5 className="ui center aligned header"> Last had: {newDate} </h5>
+	      <div className="div_button">
+	        <SelectButton resetButton={this.resetButton} buttonText={this.state.buttonText} green={this.state.green} updateButton={this.updateButton} />
+	      </div>
+		</div>
+	)}
+  }
+
+  render() {
     return (
       <div>
         <h2 className="ui center aligned icon header">
@@ -36,12 +47,9 @@ class Results extends React.Component {
 	   Your dinner: 
         </h2>
         <h1 className="ui center aligned header"> {this.props.displayedFood.key} </h1>
-	<h5 className="ui center aligned header"> Last had: {newDate} </h5>
-	<div className="div_button">
-	  <SelectButton resetButton={this.resetButton} buttonText={this.state.buttonText} green={this.state.green} updateButton={this.updateButton} />
-	</div>
+		{this.initialRender()}
       </div>
-    );}
+    );
   }
 }
 

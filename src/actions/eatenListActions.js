@@ -15,7 +15,7 @@ export function fetchList() {
 export function addItem(item) {
   return function(dispatch) {
     FoodAPIs.addEaten(item).then((response) => {
-      dispatch({type: "ADD_ITEM", payload: response.reverse()})
+      dispatch({type: "ADD_EATEN", payload: response.reverse()})
     })
   }
 }

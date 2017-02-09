@@ -22,7 +22,7 @@ const eatenListReducer = (state=initialState, action) => {
         eatenList: action.payload
       }
     }
-    case "ADD_ITEM": {
+	case "ADD_EATEN": {
       return {
         ...state,
    	    eatenList: action.payload
