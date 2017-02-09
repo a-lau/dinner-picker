@@ -1,4 +1,4 @@
-import { combineReducers } 		from 'redux';
+import { combineReducers } from 'redux';
 
 import tab from './tabReducer.js';
 import selectionListReducer from './selectionListReducer.js';

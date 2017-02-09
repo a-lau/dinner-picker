@@ -16,40 +16,40 @@ const selectionListReducer = (state=initialState, action) => {
     }
     case "FETCH_SLIST_FULFILLED": {
       return {
-	    ...state,
-	    fetching: false,
-	    fetched: true,
-	    selectionList: action.payload
+        ...state,
+        fetching: false,
+        fetched: true,
+        selectionList: action.payload
       }
     }
     case "CLEAR_ERROR": {
       return {
         ...state,
-	    error: action.payload
-	  }
-	}
+        error: action.payload
+      }
+    }
     case "EDIT_ITEM": {
       return {
         ...state,
-	    selectionList: action.payload
+        selectionList: action.payload
       }
     }
     case "ADD_ITEM": {
       return {
         ...state,
-	    selectionList: action.payload
+        selectionList: action.payload
       }
     }
     case "DEL_ITEM": {
       return {
         ...state,
-	    selectionList: action.payload
+        selectionList: action.payload
       }
     }
     case "UPDATE_ITEM": {
       return {
         ...state,
-	    selectionList: action.payload
+        selectionList: action.payload
       }
     }
     default:

@@ -11,11 +11,11 @@ const FoodList = {
          headers: { 'Content-Type': 'application/json' } })
       .then(response => { 
         if (response.ok) {
-	      return response.json()
+          return response.json()
         } else {
-	      throw Error('Duplicate Entry')
-		}
-	  })
+          throw Error('Duplicate Entry')
+        }
+      })
   },
   editFood: function(params) {
     return fetch('/api/v1/edit_food/',
@@ -24,23 +24,23 @@ const FoodList = {
          headers: { 'Content-Type': 'application/json' } })
       .then(response => { 
         if (response.ok) {
-	      return response.json()
+          return response.json()
         } else {
-	      throw Error('Duplicate Entry')
-	    }
+          throw Error('Duplicate Entry')
+        }
       })
   },
   updatePicked: function(params) {
     return fetch('/api/v1/update_picked/',
       { method:   'post',
         body:    JSON.stringify(params),
-	headers: { 'Content-Type': 'application/json' } })
+        headers: { 'Content-Type': 'application/json' } })
       .then(response => {
-	    if (response.ok) {
-	      return response.json()
-	    } else {
-	      console.log("bad response")
-	    }
+        if (response.ok) {
+          return response.json()
+        } else {
+          console.log("bad response")
+        }
       })
   },
   delFood: function(params) {
@@ -63,11 +63,11 @@ const FoodList = {
         headers: { 'Content-Type': 'application/json' } })
       .then(response => {
         if (response.ok) {
-	      return response.json()
-	    } else {
-	      console.log("bad response")
-	      return null
-	    }
+          return response.json()
+        } else {
+          console.log("bad response")
+          return null
+        }
       })
   }
 }

@@ -5,10 +5,10 @@ export function fetchList() {
   return function(dispatch) {
     FoodAPIs.getEaten().then((response) => {
       dispatch({type: "FETCH_ELIST_FULFILLED", payload: response.reverse()})
-	})
-	.catch((err) => {
+    })
+    .catch((err) => {
       dispatch({type: "FETCH_ELIST_REJECTED", payload: err})
-	})
+    })
   }
 }
 

@@ -89,26 +89,26 @@ class FoodList extends React.Component {
   renderItemOrEditField(item) {
     if ( this.state.editing === item.key ) {
       return(
-	    <div className="item middle aligned" key={item.name}>
-	      <div className="ui input">
-	        <InputField onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} updateInput={this.updateInput} />
-	        <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange.bind(this, item)}>
-	          <option value="10">10</option>
-	          <option value="9">9</option>
-	          <option value="8">8</option>
-	          <option value="7">7</option>
-	          <option value="6">6</option>
-	          <option value="5">5</option>
-	          <option value="4">4</option>
-	          <option value="3">3</option>
-	          <option value="2">2</option>
-	          <option value="1">1</option>
-	        </select>
+        <div className="item middle aligned" key={item.name}>
+          <div className="ui input">
+            <InputField onKeyDown={this.handleEvent.bind(this)} type="text" defaultValue={item.key} updateInput={this.updateInput} />
+            <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange.bind(this, item)}>
+              <option value="10">10</option>
+              <option value="9">9</option>
+              <option value="8">8</option>
+              <option value="7">7</option>
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
           </div>
-	    <div className="right floated content">
-	      <i className="ban icon" onClick={() => this.cancelEdit()}></i>
-	      <i className="save icon" onClick={() => this.clickSave()}></i>
-	    </div>
+        <div className="right floated content">
+          <i className="ban icon" onClick={() => this.cancelEdit()}></i>
+          <i className="save icon" onClick={() => this.clickSave()}></i>
+        </div>
       </div>
     )
     } else {
@@ -131,10 +131,10 @@ class FoodList extends React.Component {
     } else {
       return (
         <div className="ui middle aligned selection list">
-	    {this.props.selectionList.map(function(item) {
-	      return this.renderItemOrEditField(item)
-	    }, this)}
-	    </div>
+        {this.props.selectionList.map(function(item) {
+          return this.renderItemOrEditField(item)
+        }, this)}
+        </div>
       )
     }
   }

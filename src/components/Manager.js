@@ -10,7 +10,7 @@ function mapState(store) {
   return {
     fetching: store.slist.fetching,
     fetched: store.slist.fetched,
-	error: store.slist.error,
+    error: store.slist.error,
     selectionList: store.slist.selectionList
   }
 }
@@ -33,7 +33,7 @@ class Manager extends React.Component {
         weight: this.state.selectValue
       };
       this.props.dispatch(slist.addItem(newFood));
-	  this.refs.meal_input.value = "";
+      this.refs.meal_input.value = "";
     }
 
     componentDidMount() {
@@ -46,40 +46,40 @@ class Manager extends React.Component {
 
     handleEvent(e) {
       if( e.keyCode === 13 ) {
-	this.clickAdd(e);
+    this.clickAdd(e);
       } else if( e.keyCode === 27 ) {
-	this.refs.meal_input.value = "";
+    this.refs.meal_input.value = "";
       }
     }
 
     render() {
       return(
-	    <div>
-	      <ErrorDisplay displayError={this.props.error} />
-  	      <div>
-	        <FoodList />
-	      </div>
+        <div>
+          <ErrorDisplay displayError={this.props.error} />
+          <div>
+            <FoodList />
+          </div>
           <div className="ui divider"></div>
-	      <h4 className="ui header">Add an entry</h4>
-	      <div className="menu">
-	        <div className="ui left input">
+          <h4 className="ui header">Add an entry</h4>
+          <div className="menu">
+            <div className="ui left input">
               <input onKeyDown={this.handleEvent.bind(this)} type="text" ref="meal_input" name="meal-type" placeholder="Enter a meal choice..."></input>
-		      <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
-		        <option value="10">10</option>
-		        <option value="9">9</option>
-		        <option value="8">8</option>
-		        <option value="7">7</option>
-		        <option value="6">6</option>
-		        <option value="5">5</option>
-		        <option value="4">4</option>
-		        <option value="3">3</option>
-		        <option value="2">2</option>
-		        <option value="1">1</option>
-		      </select>
-		      <button className="ui button" onClick={this.clickAdd}>Add</button>
+              <select className="ui dropdown" value={this.state.selectValue} onChange={this.handleChange}>
+                <option value="10">10</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+              <button className="ui button" onClick={this.clickAdd}>Add</button>
             </div> 
           </div>
-	    </div>
+        </div>
       );
    }
 }

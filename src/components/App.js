@@ -23,32 +23,32 @@ class App extends React.Component {
   }
 
   isActiveTab(tabName) {
-	return (this.props.tabClicked === tabName ? 'active' : '')
+    return (this.props.tabClicked === tabName ? 'active' : '')
   }
 
   renderTab() {
     switch (this.props.tabClicked) {
       case "first":
         return (
-	  <div className={"ui bottom attached tab segment active"} data-tab="first">
-	    <Picker />
-	    <Results />
-	  </div>
-	);
+          <div className={"ui bottom attached tab segment active"} data-tab="first">
+            <Picker />
+            <Results />
+          </div>
+        );
       case "second":
-	return (
-	  <div className={"ui bottom attached tab segment active"} data-tab="second">
-	    <Manager />
-	  </div>
-	);
+        return (
+          <div className={"ui bottom attached tab segment active"} data-tab="second">
+            <Manager />
+          </div>
+        );
       case "third":
-	return (
-	  <div className={"ui bottom attached tab segment active"} data-tab="third">
-	    <EatenList />
-	  </div>
-	);
+        return (
+          <div className={"ui bottom attached tab segment active"} data-tab="third">
+            <EatenList />
+          </div>
+        );
       default:
-	return null
+    return null
     }
   }
   
@@ -74,10 +74,10 @@ class App extends React.Component {
         </h1>
         <div className="ui top attached tabular menu">
           <a className={"item "+this.isActiveTab("first")} data-tab="first" onClick={ () => this.setTabFocus("first")}>Pick a meal</a>
-	  <a className={"item "+this.isActiveTab("second")} data-tab="second" onClick={() => this.setTabFocus("second")}>Manage meals</a>
-	  <a className={"item "+this.isActiveTab("third")} data-tab="third" onClick={() => this.setTabFocus("third")}>Eating history</a>
+          <a className={"item "+this.isActiveTab("second")} data-tab="second" onClick={() => this.setTabFocus("second")}>Manage meals</a>
+          <a className={"item "+this.isActiveTab("third")} data-tab="third" onClick={() => this.setTabFocus("third")}>Eating history</a>
         </div>
-	{this.renderTab()}
+        {this.renderTab()}
       </div>
     );
   }

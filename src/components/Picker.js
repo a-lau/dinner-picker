@@ -8,7 +8,7 @@ function mapState(store) {
   return {
     fetching: store.slist.fetching,
     fetched: store.slist.fetched,
-	error: store.slist.error,
+    error: store.slist.error,
     selectionList: store.slist.selectionList,
     displayedFood: store.foodChoice.displayedFood,
   }
@@ -27,36 +27,36 @@ class Picker extends React.Component {
   
   pickFood() {
     const tempCompare = {
-	key: null,
-	val: null,
-        time: Date.now(),
-    	date: null
+      key: null,
+      val: null,
+      time: Date.now(),
+      date: null
     }
     this.props.selectionList.map(function(item) {
       const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
-	    if (!!!tempCompare.val) {
-	      tempCompare.key = item.key
-	      tempCompare.val = modded
-	      if(item.lastUsed) {
+        if (!!!tempCompare.val) {
+          tempCompare.key = item.key
+          tempCompare.val = modded
+          if(item.lastUsed) {
             tempCompare.date = item.lastUsed
-	      } else {
-	        tempCompare.date = "Not yet eaten"
+          } else {
+            tempCompare.date = "Not yet eaten"
           }
-	    } else {
-	      if (modded > tempCompare.val) {
-	        tempCompare.key = item.key
-	        tempCompare.val = modded
-	        if(item.lastUsed) {
-	          tempCompare.date = item.lastUsed
-	        } else {
-	          tempCompare.date = "Not yet eaten"
-	        }
+        } else {
+          if (modded > tempCompare.val) {
+            tempCompare.key = item.key
+            tempCompare.val = modded
+            if(item.lastUsed) {
+              tempCompare.date = item.lastUsed
+            } else {
+              tempCompare.date = "Not yet eaten"
+            }
           }
-	    }
+        }
       return null
     });
     this.props.dispatch(foodChoice.setDisplayedFood(tempCompare))
-	this.props.dispatch(slist.updateItem(tempCompare))
+    this.props.dispatch(slist.updateItem(tempCompare))
   }
 
   render() {

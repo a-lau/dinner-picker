@@ -14,18 +14,17 @@ const eatenListReducer = (state=initialState, action) => {
       return {...state, fetching: false, error: action.payload}
     }
     case "FETCH_ELIST_FULFILLED": {
-	    console.log(action.payload)
       return {
         ...state,
-	    fetching: false,
+        fetching: false,
         fetched: true,
         eatenList: action.payload
       }
     }
-	case "ADD_EATEN": {
+    case "ADD_EATEN": {
       return {
         ...state,
-   	    eatenList: action.payload
+        eatenList: action.payload
       }
     }
     default:
