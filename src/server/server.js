@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('foodList.db');
+const db = new sqlite3.Database('foodlist.db');
 
 // Setting up parsing of post data
 const bodyParser = require('body-parser');
@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// API Calls for foodList
+// API Calls for foodlist
 app.get('/api/v1/list_food', function (req, res) {
   db.all('SELECT * FROM foodlist', function(err, row) {
     res.send(JSON.stringify(row));
@@ -20,7 +20,7 @@ app.get('/api/v1/list_food', function (req, res) {
 app.post('/api/v1/add_food', function (req, res) {
   checkExists(req.body.key).then(exists => {
   if(!exists) {
-    const sqlRequest = "INSERT INTO 'foodList' (name, modDate, weight, key, lastUsed) " + 
+    const sqlRequest = "INSERT INTO 'foodlist' (name, moddate, weight, key, lastused) " + 
                        "VALUES('" + req.body.name + "', '" + req.body.date + "', '" + req.body.weight + "', '" + req.body.key + "', NULL)"
     db.run(sqlRequest, function(err) {
       if(err !== null) {
@@ -40,8 +40,8 @@ app.post('/api/v1/add_food', function (req, res) {
 app.post('/api/v1/edit_food', function (req, res) {
   checkExists(req.body.key).then(exists => {
   if(!exists || req.body.old == req.body.key) {
-    const sqlRequest = "UPDATE foodList SET name='" + req.body.name + "', " +
-                       "modDate='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
+    const sqlRequest = "UPDATE foodlist SET name='" + req.body.name + "', " +
+                       "moddate='" + req.body.date + "', " + "weight='" + req.body.weight + "', " + "key='" + req.body.key + "' " +
                        "WHERE name='" + req.body.old + "'"
     db.run(sqlRequest, function(err) {
       if(err !== null) {
@@ -59,7 +59,7 @@ app.post('/api/v1/edit_food', function (req, res) {
 })
 
 app.post('/api/v1/update_picked', function (req, res) {
-  const sqlRequest = "UPDATE foodList SET modDate='" + req.body.time + "' " +
+  const sqlRequest = "UPDATE foodlist SET moddate='" + req.body.time + "' " +
                      "WHERE key='" + req.body.key + "'"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
@@ -73,7 +73,7 @@ app.post('/api/v1/update_picked', function (req, res) {
 })
 
 app.delete('/api/v1/del_food', function (req, res) {
-  db.run("DELETE FROM foodList WHERE key='" + req.body.key + "'",
+  db.run("DELETE FROM foodlist WHERE key='" + req.body.key + "'",
          function(err) {
     if(err !== null) {
       next(err);
@@ -87,13 +87,13 @@ app.delete('/api/v1/del_food', function (req, res) {
 
 // API calls for eatenList
 app.post('/api/v1/add_eaten', function (req, res) {
-  const sqlRequest = "INSERT INTO 'eatenList' (name, dateUsed) " +
+  const sqlRequest = "INSERT INTO 'eatenlist' (name, dateused) " +
                      "VALUES('" + req.body.name + "', '" + req.body.date + "')"
   db.run(sqlRequest, function(err) {
     if(err !== null) {
       next(err);
     } else {
-      db.all('SELECT * FROM eatenList', function(err, row) {
+      db.all('SELECT * FROM eatenlist', function(err, row) {
         res.send(JSON.stringify(row));
       });
     }
@@ -101,7 +101,7 @@ app.post('/api/v1/add_eaten', function (req, res) {
 })
 
 app.get('/api/v1/list_eaten', function (req, res) {
-  db.all('SELECT * FROM eatenList', function(err, row) {
+  db.all('SELECT * FROM eatenlist', function(err, row) {
     res.send(JSON.stringify(row));
   });
 })
@@ -120,48 +120,48 @@ function checkExists(key) {
 // TODO Make a helper function that takes the params and then runs a check instead of repeating code for both tables
 
 // DB Creation
-db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodList'",
+db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='foodlist'",
   function(err, rows) {
     if(err !== null) {
       console.log(err);
     }
     else if(rows === undefined) {
-      db.run('CREATE TABLE "foodList" ' +  
+      db.run('CREATE TABLE "foodlist" ' +  
              '("name" TEXT, ' + 
-              '"lastUsed" INTEGER, ' +
-              '"modDate" INTEGER, ' + 
+              '"lastused" INTEGER, ' +
+              '"moddate" INTEGER, ' + 
               '"weight" INTEGER, ' +
               '"key" TEXT)', function(err) {
       if(err != null) {
         console.log(err);
       }
       else {
-        console.log("SQL Table foodList initialized.");
+        console.log("SQL Table foodlist initialized.");
       }
     });
     }
     else {
-      console.log("SQL Table foodList already initialized.");
+      console.log("SQL Table foodlist already initialized.");
     }
 });
 
-db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='eatenList'",
+db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='eatenlist'",
   function(err, rows) {
     if(err !== null) {
       console.log(err);
     } else if(rows === undefined) {
-      db.run('CREATE TABLE "eatenList" ' +
+      db.run('CREATE TABLE "eatenlist" ' +
              '("name" TEXT, ' +
-              '"dateUsed" INTEGER, ' +
+              '"dateused" INTEGER, ' +
               '"key" INTEGER PRIMARY KEY)', function(err) {
     if(err != null) {
       console.log(err);
     } else {
-      console.log("SQL Table eatenList initialized.");
+      console.log("SQL Table eatenlist initialized.");
     }
   });
   } else {
-    console.log("SQL Table eatenList already initialized.");
+    console.log("SQL Table eatenlist already initialized.");
   }
 });
 

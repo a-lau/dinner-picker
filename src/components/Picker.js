@@ -33,12 +33,12 @@ class Picker extends React.Component {
       date: null
     }
     this.props.selectionList.map(function(item) {
-      const modded = (tempCompare.time - item.modDate) * item.weight / 86400000 // converting ms to days
+      const modded = (tempCompare.time - item.moddate) * item.weight / 86400000 // converting ms to days
         if (!!!tempCompare.val) {
           tempCompare.key = item.key
           tempCompare.val = modded
-          if(item.lastUsed) {
-            tempCompare.date = item.lastUsed
+          if(item.lastused) {
+            tempCompare.date = item.lastused
           } else {
             tempCompare.date = "Not yet eaten"
           }
@@ -46,8 +46,8 @@ class Picker extends React.Component {
           if (modded > tempCompare.val) {
             tempCompare.key = item.key
             tempCompare.val = modded
-            if(item.lastUsed) {
-              tempCompare.date = item.lastUsed
+            if(item.lastused) {
+              tempCompare.date = item.lastused
             } else {
               tempCompare.date = "Not yet eaten"
             }
